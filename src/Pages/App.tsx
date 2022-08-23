@@ -10,18 +10,17 @@ export const App = () => {
   
   return (
       <>
-      
-        <GameBox>
-          <BackGround/>
-          <MoveHeroContextProvider>
-            <>
+        <MoveHeroContextProvider>
+          <>
+            <GameBox>
+              <BackGround/>
               <Hero/>
+            </GameBox> 
+            <Footer>
               <Arrows/>
-            </>
-          </MoveHeroContextProvider>
-        </GameBox> 
-        <Footer>
-        </Footer>
+            </Footer>
+          </>
+        </MoveHeroContextProvider>
       </>
   );
 }

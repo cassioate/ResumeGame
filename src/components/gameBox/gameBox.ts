@@ -5,5 +5,5 @@ export const GameBoxStyled = styled.div`
   justify-content: center;
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
 `

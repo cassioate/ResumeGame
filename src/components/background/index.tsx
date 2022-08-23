@@ -2,7 +2,6 @@ import React from 'react';
 import{BackGroundStyled, Container} from './styles';
 
 export const BackGround = ({children}: any) => {
-  console.log("BackGround")
   return (
     <Container>
       <BackGroundStyled

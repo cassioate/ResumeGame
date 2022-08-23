@@ -1,5 +1,4 @@
-import React, { Children, useContext } from 'react';
-import { HeroMoveContext } from '../../context/moveHeroContext';
+import React from 'react';
 import { GameBoxStyled } from './gameBox';
 
 export const GameBox = ({children}: any) => {
