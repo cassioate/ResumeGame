@@ -17,8 +17,8 @@ export const Hero = () => {
 
   return (
     <><HeroStyled
-      bottom={bottom + heroSizeHeight}
-      left={left + heroSizeWidth}
+      bottom={bottom}
+      left={left}
       width={heroSizeWidth}
       height={heroSizeHeight}
       direction={directionHero}

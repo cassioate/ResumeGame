@@ -6,6 +6,8 @@ export const FooterStyled = styled.div`
   bottom: 0px;
   position: absolute;
   opacity: 80%;
-  /* left: 50%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: black;
 `

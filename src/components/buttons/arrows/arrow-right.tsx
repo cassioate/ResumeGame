@@ -6,10 +6,15 @@ import useEventListener from '@use-it/event-listener';
 
 export const ArrowRight = () => {
   const {setLeft, setDirectionHero, left} = useContext(HeroMoveContext);
+  const widthSize = window.screen.width
 
   const changePosition = async () => {
-    setLeft(left+25)
-    setDirectionHero('RIGHT')
+    console.log(left)
+    console.log(widthSize)
+    if (left < widthSize) {
+      setLeft(left+15)
+      setDirectionHero('RIGHT')
+    }
   }
 
   useEventListener('keydown', async (event: any) => {
