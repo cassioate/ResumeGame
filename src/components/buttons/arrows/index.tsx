@@ -7,6 +7,7 @@ import { Container } from './styles';
 
 
 export const Arrows = () => {
+
   return (
     <Container>
       <ArrowUp></ArrowUp>

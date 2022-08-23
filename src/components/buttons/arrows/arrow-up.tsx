@@ -12,7 +12,7 @@ export const ArrowUp = () => {
 
   return (
     <ButtonIconArrowUp onClick={() => changePosition()}>
-      <FiArrowUp></FiArrowUp>
+      <FiArrowUp/>
     </ButtonIconArrowUp>
   );
 }

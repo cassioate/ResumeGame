@@ -4,12 +4,15 @@ interface PropsImgHero {
   bottom: number
   left: number
 }
-
-export const HeroStyled = styled.img<PropsImgHero>`
+export const HeroStyledBase = styled.img<PropsImgHero>`
   position: absolute;
-  bottom: ${props => props.bottom + 'px'};
-  left: ${props => props.left + 'px'};
-  width: ${props => props.width + 'px'};
-  height: ${props => props.height + 'px'};
-  src: ${props => props.src};
 `
+export const HeroStyled = styled.img.attrs<PropsImgHero>((props) => ({
+  style: {
+    bottom: props.bottom,
+    left: props.left,
+  }
+}))<PropsImgHero>`
+  position: absolute;
+`
+
