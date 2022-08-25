@@ -5,7 +5,7 @@ export const GameBoxStyled = styled.div`
   width: 800px;
   height: 500px;
   display: flex;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `

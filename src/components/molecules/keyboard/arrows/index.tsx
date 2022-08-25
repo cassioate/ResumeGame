@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { ArrowDown } from './arrow-down';
-import { ArrowLeft } from './arrow-left';
-import { ArrowRight } from './arrow-right';
-import { ArrowUp } from './arrow-up';
-import { SpaceKeyboard } from './space';
+import { SpaceKeyboard } from '../../../atoms/buttons/arrowButtons/aKeyboardSpace';
+import { ArrowDown } from '../../../atoms/buttons/arrowButtons/arrowDown';
+import { ArrowLeft } from '../../../atoms/buttons/arrowButtons/arrowLeft';
+import { ArrowRight } from '../../../atoms/buttons/arrowButtons/arrowRight';
+import { ArrowUp } from '../../../atoms/buttons/arrowButtons/arrowUp';
+
 
 import { Container, ContainerArrow } from './styles';
 
