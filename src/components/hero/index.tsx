@@ -5,9 +5,7 @@ import {HeroStyled} from './styles';
 
 export const Hero = () => {
   const [hero, setHero] = useState(0);
-  const {bottom, left, directionHero} = useContext(HeroMoveContext);
-  const heroSizeWidth = 100
-  const heroSizeHeight = 100
+  const {width, height, bottom, left, directionHero} = useContext(HeroMoveContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,8 +17,8 @@ export const Hero = () => {
     <><HeroStyled
       bottom={bottom}
       left={left}
-      width={heroSizeWidth}
-      height={heroSizeHeight}
+      width={width}
+      height={height}
       direction={directionHero}
       src={`./assets/hero/Chara - BlueIdle000${hero}.png`}
       />
