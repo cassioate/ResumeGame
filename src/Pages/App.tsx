@@ -1,10 +1,10 @@
 import React from 'react';
-import {Hero} from '../components/hero';
-import { BackGround } from '../components/background';
+import {Hero} from '../components/molecules/hero';
+import { BackGround } from '../components/atoms/background';
 import { MoveHeroContextProvider } from '../context/moveHeroContext';
-import { Arrows } from '../components/buttons/arrows';
-import { Footer } from '../components/footer';
-import { GameBox } from '../components/gameBox';
+import { Arrows } from '../components/molecules/buttons/arrows';
+import { Footer } from '../components/organisms/footer';
+import { GameBox } from '../components/atoms/gameBox';
 import { AppStyled } from './App-styled';
 // import { DirectionContextProvider } from '../context/directionContext';
 
@@ -13,7 +13,6 @@ export const App = () => {
   return (
       <AppStyled>
         <MoveHeroContextProvider>
-          {/* <DirectionContextProvider> */}
             <>
               <GameBox>
                 <BackGround/>
@@ -23,7 +22,6 @@ export const App = () => {
                 <Arrows/>
               </Footer>
             </>           
-          {/* </DirectionContextProvider> */}
         </MoveHeroContextProvider>
       </AppStyled>
   );

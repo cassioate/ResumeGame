@@ -41,6 +41,7 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
       setBottom(0)
     }
   }, [bottom])
+  
 
   return (
     <HeroMoveContext.Provider value={{

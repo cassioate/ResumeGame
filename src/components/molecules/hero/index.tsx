@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import React from 'react';
-import { HeroMoveContext } from '../../context/moveHeroContext';
+import { HeroMoveContext } from '../../../context/moveHeroContext';
 import {HeroStyled} from './styles';
 
 export const Hero = () => {

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { HeroMoveContext } from '../../../context/moveHeroContext';
+import { HeroMoveContext } from '../../../../context/moveHeroContext';
 import { ArrowDown } from './arrow-down';
 import { ArrowLeft } from './arrow-left';
 import { ArrowRight } from './arrow-right';
@@ -8,11 +8,11 @@ import { ArrowUp } from './arrow-up';
 import { SpaceKeyboard } from './space';
 import useEventListener from '@use-it/event-listener';
 import { Container, ContainerArrow } from './styles';
-import { HERO_SIZE_HEIGHT, HERO_SIZE_WIDTH } from '../../../settings/constants';
+import { HERO_SIZE_HEIGHT, HERO_SIZE_WIDTH } from '../../../../settings/constants';
 
 
 export const Arrows = () => {
-  const {width, height, left, bottom, setHeight, setWidth, setBottom, setLeft, setDirectionHero} = useContext(HeroMoveContext);
+  const {left, bottom, setHeight, setWidth, setBottom, setLeft, setDirectionHero} = useContext(HeroMoveContext);
   const [isArrowRightPress, setIsArrowRightPress] = useState (false)
   const [isArrowLeftPress, setIsArrowLeftPress] = useState (false)
   const [isArrowUpPress, setIsArrowUpPress] = useState (false)
