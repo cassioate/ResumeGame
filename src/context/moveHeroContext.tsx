@@ -35,15 +35,21 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   const [directionHero, setDirectionHero] = useState('RIGHT');
   const [endJump, setEndJump] = useState(false)
   const intervalLeft = useRef<any>()
-  const GRAVITY = 0.95
+  
+  const GRAVITY_DOWN = 0.99
+  const GRAVITY_UP = 0.93
   const FLOOR = 0
   const MAX_JUMP = 25
+  const MOVE_LEFT = 0.25
+  const MOVE_RIGHT = 0.25
+
   
   // Gravity
   useEffect(() => {
+    console.log(bottom)
     if (bottom > FLOOR && endJump){
       const timeId = setInterval(() => {   
-        setBottom((bottom-0.25)*GRAVITY);
+        setBottom((bottom-1)*GRAVITY_DOWN);
       }, 20)
       return () => {
         clearInterval(timeId)
@@ -57,7 +63,6 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   // Jumping
   useEffect(() => {
     if (bottom >= MAX_JUMP) {
-      console.log("teste")
       setEndJump(true)
     } else if (bottom === 0) {
       setEndJump(false)
@@ -65,8 +70,7 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
 
     if (bottom > FLOOR && !endJump){
       const timeId = setInterval(() => {   
-        console.log('2')
-        setBottom((bottom+2)*GRAVITY);
+        setBottom((bottom+2)*GRAVITY_UP);
       }, 20)
       return () => {
         clearInterval(timeId)
@@ -85,12 +89,12 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   useEffect(() => {
     if (velocityMove === 0){
       if (isArrowRightPress){
-        setVelocityMove(0.5)
-        setLeft(left+0.5)
+        setVelocityMove(MOVE_RIGHT)
+        setLeft(left+MOVE_RIGHT)
       } 
       if (isArrowLeftPress){
-        setVelocityMove(-0.5)
-        setLeft(left-0.5)
+        setVelocityMove(-MOVE_LEFT)
+        setLeft(left-MOVE_LEFT)
       }
     }
   }, [left, velocityMove, isArrowLeftPress, isArrowRightPress])
@@ -109,9 +113,9 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
 
   // Change the side the carácter is looking
   useEffect(() => {
-    if (velocityMove === 0.5) {
+    if (velocityMove === MOVE_RIGHT) {
       setDirectionHero("RIGHT")
-    } else if (velocityMove === -0.5){
+    } else if (velocityMove === -MOVE_LEFT){
       setDirectionHero("LEFT")
     }
   }, [velocityMove])
