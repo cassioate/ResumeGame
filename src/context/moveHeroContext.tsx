@@ -35,7 +35,7 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   const [directionHero, setDirectionHero] = useState('RIGHT');
   const [endJump, setEndJump] = useState(false)
   const intervalLeft = useRef<any>()
-  
+
   const GRAVITY_DOWN = 0.99
   const GRAVITY_UP = 0.93
   const FLOOR = 0
@@ -102,7 +102,7 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   // Make a Looping to use the velocity to move the Hero
   useEffect(() => {
     intervalLeft.current = setInterval(() => {   
-      if (velocityMove !== 0 && left >= 0 && left <= 90) {
+      if (left >= 0 && left <= 90) {
         setLeft(left+velocityMove)
       }
     }, 20)
