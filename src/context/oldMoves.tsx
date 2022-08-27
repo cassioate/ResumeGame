@@ -67,7 +67,6 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
         clearInterval(timeId)
       }
     }
-    console.log(bottom)
   }, [bottom])
 
   const upMove = () => {

@@ -46,7 +46,6 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   
   // Gravity
   useEffect(() => {
-    console.log(bottom)
     if (bottom > FLOOR && endJump){
       const timeId = setInterval(() => {   
         setBottom((bottom-1)*GRAVITY_DOWN);
