@@ -24,6 +24,7 @@ export const HeroMoveContext = React.createContext({} as IHeroMoveContext);
 export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) => {
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
+  const [velocityMove, setVelocityMove] = useState(0);
   const [width, setWidth] = useState(HERO_SIZE_WIDTH);
   const [height, setHeight] = useState(HERO_SIZE_HEIGHT);
   const [isArrowRightPress, setIsArrowRightPress] = useState (false)
@@ -33,17 +34,39 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   const [isArrowSpacePress, setIsArrowSpacePress] = useState (false)
   const [directionHero, setDirectionHero] = useState('RIGHT');
   const [endJump, setEndJump] = useState(false)
-  const intervalBottom = useRef<any>()
-  const jumpBottom = useRef<any>(bottom)
-  const GRAVITY = 0.5
+  const intervalLeft = useRef<any>()
+  const GRAVITY = 0.95
   const FLOOR = 0
   const MAX_JUMP = 25
-
+  
   // Gravity
   useEffect(() => {
     if (bottom > FLOOR && endJump){
       const timeId = setInterval(() => {   
-        setBottom(bottom-GRAVITY);
+        setBottom((bottom-0.25)*GRAVITY);
+      }, 20)
+      return () => {
+        clearInterval(timeId)
+      }
+    }
+    if (bottom < FLOOR){
+      setBottom(0)
+    }
+  }, [bottom, endJump])
+
+  // Jumping
+  useEffect(() => {
+    if (bottom >= MAX_JUMP) {
+      console.log("teste")
+      setEndJump(true)
+    } else if (bottom === 0) {
+      setEndJump(false)
+    } 
+
+    if (bottom > FLOOR && !endJump){
+      const timeId = setInterval(() => {   
+        console.log('2')
+        setBottom((bottom+2)*GRAVITY);
       }, 20)
       return () => {
         clearInterval(timeId)
@@ -51,37 +74,47 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
     }
   }, [bottom, endJump])
 
-  // Jumping
+  // Make the move of Jumping
   useEffect(() => {
-    if (bottom > FLOOR && bottom < MAX_JUMP && !endJump){
-      const timeId = setInterval(() => {   
-        setBottom(bottom+GRAVITY);
-      }, 20)
-      return () => {
-        clearInterval(timeId)
-      }
-    } else if (bottom === MAX_JUMP) {
-      setEndJump(true)
-    } else if (bottom === 0) {
-      setEndJump(false)
-    }
-  }, [bottom])
-
-  useEffect(() => {
-    if (isArrowRightPress){
-      setLeft(left+1)
-    } 
-    if (isArrowLeftPress){
-      setLeft(left-1)
-    } 
     if (bottom === FLOOR && (isArrowUpPress  || isArrowSpacePress)){
       setBottom(bottom+1)
     } 
-    // if (bottom > MAX_JUMP) {
-    //   clearInterval(intervalBottom.current)
-    //   intervalBottom.current = undefined
-    // }
-  }, [bottom, isArrowUpPress, isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress])
+  }, [bottom, isArrowUpPress, isArrowSpacePress])
+
+  // Make move for the Right or the Left inside the GameBox
+  useEffect(() => {
+    if (velocityMove === 0){
+      if (isArrowRightPress){
+        setVelocityMove(0.5)
+        setLeft(left+0.5)
+      } 
+      if (isArrowLeftPress){
+        setVelocityMove(-0.5)
+        setLeft(left-0.5)
+      }
+    }
+  }, [left, velocityMove, isArrowLeftPress, isArrowRightPress])
+
+  // Make a Looping to use the velocity to move the Hero
+  useEffect(() => {
+    intervalLeft.current = setInterval(() => {   
+      if (velocityMove !== 0 && left >= 0 && left <= 90) {
+        setLeft(left+velocityMove)
+      }
+    }, 20)
+    return () => {
+      clearInterval(intervalLeft.current)
+    }
+  }, [left, velocityMove])
+
+  // Change the side the carácter is looking
+  useEffect(() => {
+    if (velocityMove === 0.5) {
+      setDirectionHero("RIGHT")
+    } else if (velocityMove === -0.5){
+      setDirectionHero("LEFT")
+    }
+  }, [velocityMove])
 
   useEventListener('keydown', ({key}: any) => {
     switch (key) {
@@ -109,12 +142,14 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   useEventListener('keyup', ({key}: any) => {
     switch (key) {
       case 'ArrowLeft':
-        setDirectionHero('LEFT')
+        clearInterval(intervalLeft.current)
+        setVelocityMove(0)
         setWidth(HERO_SIZE_WIDTH)
         setIsArrowLeftPress(false)
         break
       case 'ArrowRight':
-        setDirectionHero('RIGHT')
+        clearInterval(intervalLeft.current)
+        setVelocityMove(0)
         setWidth(HERO_SIZE_WIDTH)
         setIsArrowRightPress(false)
         break

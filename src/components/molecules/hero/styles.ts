@@ -11,7 +11,7 @@ export const HeroStyledBase = styled.img<PropsImgHero>`
 export const HeroStyled = styled.img.attrs<PropsImgHero>((props) => ({
   style: {
     bottom: props.bottom+'%',
-    left: (props.left < 90) ? props.left+'%' : '90%',
+    left: props.left+'%',
     transform: `scaleX(${props.direction === 'RIGHT' ? 1 : -1})`
   }
 }))<PropsImgHero>`
