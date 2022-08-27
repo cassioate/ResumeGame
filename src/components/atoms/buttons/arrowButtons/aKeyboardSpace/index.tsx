@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { MdSpaceBar } from "react-icons/md"
-import { HeroMoveContext } from '../../../../../context/moveHeroContext';
 import { ButtonIconSpace } from './styles';
 
-export const SpaceKeyboard = () => {
-  const {spaceMove} = useContext(HeroMoveContext)
-  
+export const SpaceKeyboard = () => { 
   return (
-    <ButtonIconSpace onClick={spaceMove}>
+    <ButtonIconSpace>
       <MdSpaceBar/>
     </ButtonIconSpace>
   );

@@ -12,11 +12,11 @@ interface IHeroMoveContext {
   directionHero: string;
   height: number;
   width: number;
-  upMove: () => void;
-  downMove: () => void;
-  rightMove: () => void;
-  leftMove: () => void;
-  spaceMove: () => void;
+  // upMove: () => void;
+  // downMove: () => void;
+  // rightMove: () => void;
+  // leftMove: () => void;
+  // spaceMove: () => void;
 }
 
 export const HeroMoveContext = React.createContext({} as IHeroMoveContext);
@@ -29,34 +29,19 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   const [isArrowRightPress, setIsArrowRightPress] = useState (false)
   const [isArrowLeftPress, setIsArrowLeftPress] = useState (false)
   const [isArrowUpPress, setIsArrowUpPress] = useState (false)
+  const [isArrowDownPress, setIsArrowDownPress] = useState (false)
   const [isArrowSpacePress, setIsArrowSpacePress] = useState (false)
   const [directionHero, setDirectionHero] = useState('RIGHT');
-  const timerId = useRef<any>()
-  const GRAVITY = 0.9
+  const [endJump, setEndJump] = useState(false)
+  const intervalBottom = useRef<any>()
+  const jumpBottom = useRef<any>(bottom)
+  const GRAVITY = 0.5
+  const FLOOR = 0
+  const MAX_JUMP = 25
 
+  // Gravity
   useEffect(() => {
-    if (isArrowRightPress){
-      rightMove()
-    } 
-    if (isArrowLeftPress){
-      leftMove()
-    } 
-    if (isArrowUpPress  || isArrowSpacePress){
-      upMove()
-    } 
-    if (bottom > 25) {
-      clearInterval(timerId.current)
-      timerId.current = undefined
-    }
-  }, [bottom])
-
-  useEffect(() => {
-    // This logic is made because useEffect stop working when bottom is 0 and the Hero can't stay pressed the button for left or right.
-    if (bottom === 0 && (isArrowRightPress || isArrowLeftPress)) {
-      setBottom(0.1)
-    } else if (bottom < 0){
-      setBottom(0)
-    } else if (bottom > 0){
+    if (bottom > FLOOR && endJump){
       const timeId = setInterval(() => {   
         setBottom(bottom-GRAVITY);
       }, 20)
@@ -64,87 +49,92 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
         clearInterval(timeId)
       }
     }
-    console.log(bottom)
+  }, [bottom, endJump])
+
+  // Jumping
+  useEffect(() => {
+    if (bottom > FLOOR && bottom < MAX_JUMP && !endJump){
+      const timeId = setInterval(() => {   
+        setBottom(bottom+GRAVITY);
+      }, 20)
+      return () => {
+        clearInterval(timeId)
+      }
+    } else if (bottom === MAX_JUMP) {
+      setEndJump(true)
+    } else if (bottom === 0) {
+      setEndJump(false)
+    }
   }, [bottom])
 
-  const downMove = () => {
-    if (bottom > 0){
-      setBottom(bottom-1)
-    }
-    if (bottom < 0){
-      setBottom(0)
-    }
-  }
+  useEffect(() => {
+    if (isArrowRightPress){
+      setLeft(left+1)
+    } 
+    if (isArrowLeftPress){
+      setLeft(left-1)
+    } 
+    if (bottom === FLOOR && (isArrowUpPress  || isArrowSpacePress)){
+      setBottom(bottom+1)
+    } 
+    // if (bottom > MAX_JUMP) {
+    //   clearInterval(intervalBottom.current)
+    //   intervalBottom.current = undefined
+    // }
+  }, [bottom, isArrowUpPress, isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress])
 
-  const upMove = () => {
-    if ((bottom === 0 ) && bottom < 15 && !timerId?.current) {
-      timerId.current = setInterval(() => { 
-        setBottom((b: number) => b+GRAVITY);
-      }, 10)
-    }
-  }
-
-  const spaceMove = () => {
-    if (bottom === 0 && bottom < 15) {
-      upMove()
-    }
-  }
-
-  const rightMove = () => {
-    if (left >= 0 && left < 90) {
-      setLeft(left+0.25)
-      setDirectionHero('RIGHT')
-    }
-  }
-
-  const leftMove = () => {
-    if (left > 0 && left <= 90){
-      setLeft(left-0.25)
-      setDirectionHero('LEFT')
-    }
-  }
-
-  useEventListener('keydown', (event: any) => {
-    if (event.key === 'ArrowLeft'){
-      setWidth(HERO_SIZE_WIDTH*0.85)
-      setIsArrowLeftPress(true)
-      leftMove()
-    } else if (event.key === 'ArrowRight'){
-      setWidth(HERO_SIZE_WIDTH*0.85)
-      setIsArrowRightPress(true)
-      rightMove()
-    } else if (event.key === 'ArrowDown'){
-      setHeight(HERO_SIZE_HEIGHT*0.75)
-      downMove()
-    } else if (event.key === 'ArrowUp'){
-      setIsArrowUpPress(true)
-      upMove()
-    } else if (event.key === ' '){
-      setIsArrowSpacePress(true)
-      spaceMove()
+  useEventListener('keydown', ({key}: any) => {
+    switch (key) {
+      case 'ArrowLeft':
+        setWidth(HERO_SIZE_WIDTH*0.9)
+        setIsArrowLeftPress(true)
+        break
+      case 'ArrowRight':
+        setWidth(HERO_SIZE_WIDTH*0.9)
+        setIsArrowRightPress(true)
+        break
+      case 'ArrowDown':
+        setHeight(HERO_SIZE_HEIGHT*0.75)
+        setIsArrowDownPress(true)
+        break
+      case 'ArrowUp':
+        setIsArrowUpPress(true)
+        break
+      case ' ':
+        setIsArrowSpacePress(true)
+        break
     }
   })
 
-  useEventListener('keyup', (event: any) => {
-    if (event.key === 'ArrowLeft'){
-      setWidth(HERO_SIZE_WIDTH)
-      setIsArrowLeftPress(false)
-    } else if (event.key === 'ArrowRight'){
-      setWidth(HERO_SIZE_WIDTH)
-      setIsArrowRightPress(false)
-    } else if (event.key === 'ArrowDown'){
-      setHeight(HERO_SIZE_HEIGHT)
-    } else if (event.key === 'ArrowUp'){
-      setIsArrowUpPress(false)
-    } else if (event.key === ' '){
-      setIsArrowSpacePress(false)
+  useEventListener('keyup', ({key}: any) => {
+    switch (key) {
+      case 'ArrowLeft':
+        setDirectionHero('LEFT')
+        setWidth(HERO_SIZE_WIDTH)
+        setIsArrowLeftPress(false)
+        break
+      case 'ArrowRight':
+        setDirectionHero('RIGHT')
+        setWidth(HERO_SIZE_WIDTH)
+        setIsArrowRightPress(false)
+        break
+      case 'ArrowDown':
+        setHeight(HERO_SIZE_HEIGHT)
+        setIsArrowDownPress(false)
+        break
+      case 'ArrowUp':
+        setIsArrowUpPress(false)
+        break
+      case ' ':
+        setIsArrowSpacePress(false)
+        break
     }
   })
 
   return (
     <HeroMoveContext.Provider value={{
       bottom, left, directionHero, width, height,
-      upMove, downMove, rightMove, leftMove, spaceMove
+      // upMove, downMove, rightMove, leftMove, spaceMove
     }}>
       {children}
     </HeroMoveContext.Provider>
