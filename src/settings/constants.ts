@@ -1,8 +1,13 @@
+export const HERO_SIZE_WIDTH_IMG = 100
+export const HERO_SIZE_HEIGHT_IMG = 100
 export const HERO_SIZE_WIDTH = 100
 export const HERO_SIZE_HEIGHT = 100
+export const HERO_SIZE_WIDTH_HIT_BOX = 25
+export const HERO_SIZE_HEIGHT_HIT_BOX = 5
 export const GRAVITY_DOWN = 0.99
 export const GRAVITY_UP = 0.93
-export const FLOOR = 0
+export const FLOOR = 1
+export const START_POSITION = 10
 export const MAX_JUMP = 25
 export const MOVE_LEFT = 0.25
 export const MOVE_RIGHT = 0.25

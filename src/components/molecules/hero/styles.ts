@@ -1,20 +1,37 @@
 import styled from 'styled-components'
 
-interface PropsImgHero {
+export const HeroStyled = styled.img`
+  src: ${props => props.src};
+  position: absolute;
+  /* object-fit: cover;
+  object-position: -25px -30px; */
+
+`
+
+interface PropsHero {
   bottom: number
   left: number
   direction: string
+  width: number
+  height: number
 }
-export const HeroStyledBase = styled.img<PropsImgHero>`
-  position: absolute;
-`
-export const HeroStyled = styled.img.attrs<PropsImgHero>((props) => ({
+
+export const HeroHitBox = styled.div.attrs<PropsHero>((props) => ({
   style: {
+    width: props.width,
+    height: props.height,
     bottom: props.bottom+'%',
     left: props.left+'%',
     transform: `scaleX(${props.direction === 'RIGHT' ? 1 : -1})`
   }
-}))<PropsImgHero>`
+}))<PropsHero>`
+
   position: absolute;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
 `
 

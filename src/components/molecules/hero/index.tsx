@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import React from 'react';
 import { HeroMoveContext } from '../../../context/heroPropsContext';
-import {HeroStyled} from './styles';
+import {HeroStyled, HeroHitBox} from './styles';
 
 export const Hero = () => {
   const [hero, setHero] = useState(0);
@@ -14,15 +14,19 @@ export const Hero = () => {
   }, [hero])
 
   return (
-    <><HeroStyled
+    <HeroHitBox
       bottom={POSITION_Y}
       left={POSITION_X}
-      width={HERO_WIDTH}
-      height={HERO_HEIGHT}
+      width={25}
+      height={55}
       direction={HERO_DIRECTION}
-      src={`./assets/hero/Chara - BlueIdle000${hero}.png`}
+    >
+      <HeroStyled
+        width={100}
+        height={100}
+        src={`./assets/hero/Chara - BlueIdle000${hero}.png`}
       />
-    </>
+    </HeroHitBox>
   );
 }
 

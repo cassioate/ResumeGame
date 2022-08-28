@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
-import { FLOOR, GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT, HERO_SIZE_WIDTH, MAX_JUMP } from "../settings/constants";
+import { FLOOR, GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT, HERO_SIZE_WIDTH, MAX_JUMP, START_POSITION } from "../settings/constants";
 
 interface IProps {
   children: ReactElement;
@@ -23,8 +23,8 @@ interface IHeroMoveContext {
 export const HeroMoveContext = React.createContext({} as IHeroMoveContext);
 
 export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) => {
-  const [POSITION_Y, setPOSITION_Y] = useState(0);
-  const [POSITION_X, setPOSITION_X] = useState(0);
+  const [POSITION_Y, setPOSITION_Y] = useState(FLOOR);
+  const [POSITION_X, setPOSITION_X] = useState(START_POSITION);
   const [HERO_WIDTH, setHERO_WIDTH] = useState(HERO_SIZE_WIDTH);
   const [HERO_HEIGHT, setHERO_HEIGHT] = useState(HERO_SIZE_HEIGHT);
   const [HERO_DIRECTION, setHERO_DIRECTION] = useState('RIGHT');

@@ -3,7 +3,7 @@ import{ButtonIconArrowDown} from './styles';
 import { FiArrowDown } from "react-icons/fi"
 import useEventListener from '@use-it/event-listener';
 import { KeyboardContext } from '../../../../../context/keyboardContext';
-import { HERO_SIZE_HEIGHT } from '../../../../../settings/constants';
+import { HERO_SIZE_HEIGHT_IMG } from '../../../../../settings/constants';
 import { HeroMoveContext } from '../../../../../context/heroPropsContext';
 
 export const ArrowDown = () => {
@@ -19,7 +19,7 @@ export const ArrowDown = () => {
   })
 
   useEventListener('mouseup', () => {
-    setHERO_HEIGHT(HERO_SIZE_HEIGHT)
+    setHERO_HEIGHT(HERO_SIZE_HEIGHT_IMG)
     setIsArrowDownPress(false)
   })
   return (

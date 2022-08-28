@@ -4,7 +4,7 @@ import { FiArrowRight } from "react-icons/fi"
 import useEventListener from '@use-it/event-listener';
 import { KeyboardContext } from '../../../../../context/keyboardContext';
 import { HeroMoveContext } from '../../../../../context/heroPropsContext';
-import { HERO_SIZE_WIDTH } from '../../../../../settings/constants';
+import { HERO_SIZE_WIDTH_IMG } from '../../../../../settings/constants';
 
 export const ArrowRight = () => {
   const { setIsArrowRightPress } = useContext(KeyboardContext)
@@ -20,7 +20,7 @@ export const ArrowRight = () => {
 
   useEventListener('mouseup', () => {
     setVELOCITY_OF_MOVE(0)
-    setHERO_WIDTH(HERO_SIZE_WIDTH)
+    setHERO_WIDTH(HERO_SIZE_WIDTH_IMG)
     setIsArrowRightPress(false)
   })
   

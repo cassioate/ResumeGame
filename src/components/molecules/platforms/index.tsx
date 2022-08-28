@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Platform1 } from "../../atoms/platform_1";
-import { PlatformStyled } from "./styles";
+import { Platform } from "../../atoms/platform";
 
 export const Platforms = () => {
   // const [hero, setHero] = useState(0);
@@ -16,7 +15,7 @@ export const Platforms = () => {
       // direction={HERO_DIRECTION}
       // src={`./assets/hero/Chara - BlueIdle000${hero}.png`}
       /> */}
-      <Platform1></Platform1>
+      <Platform></Platform>
     </>
   );
 }
