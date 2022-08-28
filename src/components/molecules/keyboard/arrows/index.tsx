@@ -21,6 +21,11 @@ export const Arrows = () => {
 
   // Make move for the Right or the Left inside the GameBox and when press ArrowDown the hero get a smaller size
   useEffect(() => {
+    if (POSITION_X <= 0){
+      setPOSITION_X(0)
+    } else if (POSITION_X >= 90){
+      setPOSITION_X(90)
+    }
     if (VELOCITY_OF_MOVE === 0){
       if (isArrowRightPress){
         setVELOCITY_OF_MOVE(MOVE_RIGHT)

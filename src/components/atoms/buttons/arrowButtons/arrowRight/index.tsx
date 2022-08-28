@@ -18,7 +18,7 @@ export const ArrowRight = () => {
     })
   })
 
-  useEventListener('mouseup', ({key}: any) => {
+  useEventListener('mouseup', () => {
     setVELOCITY_OF_MOVE(0)
     setHERO_WIDTH(HERO_SIZE_WIDTH)
     setIsArrowRightPress(false)

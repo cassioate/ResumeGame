@@ -15,7 +15,7 @@ export const ArrowUp = () => {
     })
   })
 
-  useEventListener('mouseup', ({key}: any) => {
+  useEventListener('mouseup', () => {
     setIsArrowUpPress(false)
   })
   return (

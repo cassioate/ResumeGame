@@ -18,7 +18,7 @@ export const ArrowDown = () => {
     })
   })
 
-  useEventListener('mouseup', ({key}: any) => {
+  useEventListener('mouseup', () => {
     setHERO_HEIGHT(HERO_SIZE_HEIGHT)
     setIsArrowDownPress(false)
   })

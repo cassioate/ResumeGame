@@ -8,6 +8,7 @@ import { AppStyled } from './App-styled';
 import { Header } from '../components/organisms/header';
 import { MoveHeroContextProvider } from '../context/heroPropsContext';
 import { KeyboardContextProvider } from '../context/keyboardContext';
+import { ResumeGame } from '../components/organisms/resumeGame';
 
 export const App = () => {
   return (
@@ -16,12 +17,8 @@ export const App = () => {
           <KeyboardContextProvider>
             <>
               <Header/>
-              <GameBox>
-                <BackGround/>
-                <Hero/>
-              </GameBox> 
+                <ResumeGame/>
               <Footer>
-                <Arrows/>
               </Footer>
             </>   
             </KeyboardContextProvider>        

@@ -15,7 +15,7 @@ export const SpaceKeyboard = () => {
       })
     })
   
-    useEventListener('mouseup', ({key}: any) => {
+    useEventListener('mouseup', () => {
       setIsArrowSpacePress(false)
     })
     

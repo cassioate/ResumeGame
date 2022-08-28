@@ -4,10 +4,8 @@ export const Container = styled.div`
   height: 75px;
   width: 600px;
   position: absolute;
-  bottom: 15%;
+  bottom: 2%;
 `;
-
-
 
 export const ContainerArrow = styled.div`
   height: 75px;
@@ -17,5 +15,4 @@ export const ContainerArrow = styled.div`
   display: flex;
   position: absolute;
   bottom: 0px;
-
 `;
