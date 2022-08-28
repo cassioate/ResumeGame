@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import React from 'react';
-import { HeroMoveContext } from '../../../context/moveHeroContext';
+import { HeroMoveContext } from '../../../context/heroPropsContext';
 import {HeroStyled} from './styles';
 
 export const Hero = () => {
   const [hero, setHero] = useState(0);
-  const {width, height, bottom, left, directionHero} = useContext(HeroMoveContext);
+  const {HERO_WIDTH, HERO_HEIGHT, POSITION_Y, POSITION_X, HERO_DIRECTION} = useContext(HeroMoveContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -15,11 +15,11 @@ export const Hero = () => {
 
   return (
     <><HeroStyled
-      bottom={bottom}
-      left={left}
-      width={width}
-      height={height}
-      direction={directionHero}
+      bottom={POSITION_Y}
+      left={POSITION_X}
+      width={HERO_WIDTH}
+      height={HERO_HEIGHT}
+      direction={HERO_DIRECTION}
       src={`./assets/hero/Chara - BlueIdle000${hero}.png`}
       />
     </>
