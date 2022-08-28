@@ -9,12 +9,12 @@ import { ArrowUp } from '../../../atoms/buttons/arrowButtons/arrowUp';
 import useEventListener from '@use-it/event-listener';
 
 import { Container, ContainerArrow } from './styles';
-import { MOVE_RIGHT, MOVE_LEFT, FLOOR, HERO_SIZE_WIDTH, HERO_SIZE_HEIGHT } from '../../../../settings/constants';
+import { MOVE_RIGHT, MOVE_LEFT, FLOOR, HERO_SIZE_HEIGHT_IMG } from '../../../../settings/constants';
 import { KeyboardContext } from '../../../../context/keyboardContext';
 
 export const Arrows = () => {
-  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, setHERO_DIRECTION, 
-    setHERO_WIDTH, setHERO_HEIGHT, VELOCITY_OF_MOVE, setVELOCITY_OF_MOVE } = useContext(HeroMoveContext)
+  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, 
+    VELOCITY_OF_MOVE, setVELOCITY_OF_MOVE, setHERO_SIZE } = useContext(HeroMoveContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
   const intervalLeft = useRef<any>()
@@ -29,17 +29,12 @@ export const Arrows = () => {
     if (VELOCITY_OF_MOVE === 0){
       if (isArrowRightPress){
         setVELOCITY_OF_MOVE(MOVE_RIGHT)
-        setHERO_WIDTH(HERO_SIZE_WIDTH*0.9)
         setPOSITION_X(POSITION_X+MOVE_RIGHT)
       } 
       if (isArrowLeftPress){
         setVELOCITY_OF_MOVE(-MOVE_LEFT)
-        setHERO_WIDTH(HERO_SIZE_WIDTH*0.9)
         setPOSITION_X(POSITION_X-MOVE_LEFT)
       }
-    }
-    if (isArrowDownPress){
-      setHERO_HEIGHT(HERO_SIZE_HEIGHT*0.75)
     }
   }, [POSITION_X, VELOCITY_OF_MOVE, isArrowLeftPress, isArrowRightPress, isArrowDownPress])
 
@@ -62,15 +57,6 @@ export const Arrows = () => {
     }
   }, [POSITION_X, VELOCITY_OF_MOVE])
 
-  // Change the side the carácter is looking
-  useEffect(() => {
-    if (VELOCITY_OF_MOVE === MOVE_RIGHT) {
-      setHERO_DIRECTION("RIGHT")
-    } else if (VELOCITY_OF_MOVE === -MOVE_LEFT){
-      setHERO_DIRECTION("LEFT")
-    }
-  }, [VELOCITY_OF_MOVE])
-
   useEventListener('keydown', ({key}: any) => {
     switch (key) {
       case 'ArrowLeft':
@@ -80,7 +66,8 @@ export const Arrows = () => {
         setIsArrowRightPress(true)
         break
       case 'ArrowDown':
-        setHERO_HEIGHT(HERO_SIZE_HEIGHT*0.75)
+        // setHERO_HEIGHT(HERO_SIZE_HEIGHT*0.75)
+        setHERO_SIZE(HERO_SIZE_HEIGHT_IMG*0.75)
         setIsArrowDownPress(true)
         break
       case 'ArrowUp':
@@ -97,17 +84,17 @@ export const Arrows = () => {
       case 'ArrowLeft':
         clearInterval(intervalLeft.current)
         setVELOCITY_OF_MOVE(0)
-        setHERO_WIDTH(HERO_SIZE_WIDTH)
+        // setHERO_WIDTH(HERO_SIZE_WIDTH)
         setIsArrowLeftPress(false)
         break
       case 'ArrowRight':
         clearInterval(intervalLeft.current)
         setVELOCITY_OF_MOVE(0)
-        setHERO_WIDTH(HERO_SIZE_WIDTH)
+        // setHERO_WIDTH(HERO_SIZE_WIDTH)
         setIsArrowRightPress(false)
         break
       case 'ArrowDown':
-        setHERO_HEIGHT(HERO_SIZE_HEIGHT)
+        setHERO_SIZE(HERO_SIZE_HEIGHT_IMG)
         setIsArrowDownPress(false)
         break
       case 'ArrowUp':
