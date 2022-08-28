@@ -4,7 +4,7 @@ export const BackGroundStyled = styled.img`
   width: 800px;
   height: 500px;
   border-style: dashed;
-  border-width: 1ch;
+  /* border-width: 1ch; */
   border-radius: 50px;
   position: absolute;
 `
