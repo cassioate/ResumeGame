@@ -8,5 +8,11 @@ export const ButtonIconSpace = styled.button`
   width: 350px;
   position: absolute;
   bottom: 0px;
-  left: 250px
+  left: 250px;
+
+  &:hover{
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+  }
 `;

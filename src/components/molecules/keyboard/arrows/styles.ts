@@ -7,6 +7,8 @@ export const Container = styled.div`
   bottom: 15%;
 `;
 
+
+
 export const ContainerArrow = styled.div`
   height: 75px;
   width: 150px;

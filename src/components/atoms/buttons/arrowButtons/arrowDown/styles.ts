@@ -8,4 +8,10 @@ export const ButtonIconArrowDown = styled.button`
   width: 50px;
   position: absolute;
   bottom: 0px;
+
+  &:hover{
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+  }
 `;
