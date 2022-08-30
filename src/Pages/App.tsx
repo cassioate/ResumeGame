@@ -17,7 +17,6 @@ export const App = () => {
                 <GameContextProvider>
                   <ResumeGame/>
                 </GameContextProvider>
-              
               <Footer>
               </Footer>
             </>   

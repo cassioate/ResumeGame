@@ -11,10 +11,12 @@ import useEventListener from '@use-it/event-listener';
 import { Container, ContainerArrow } from './styles';
 import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL } from '../../../../settings/constants';
 import { KeyboardContext } from '../../../../context/keyboardContext';
+import { GameContext } from '../../../../context/gameContext';
 
 export const Arrows = () => {
   const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, 
     VELOCITY_OF_MOVE, setVELOCITY_OF_MOVE, setHERO_SIZE, FLOOR } = useContext(HeroMoveContext)
+  const { END_GAME } = useContext(GameContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
   const intervalLeft = useRef<any>()
@@ -58,51 +60,55 @@ export const Arrows = () => {
   }, [POSITION_X, VELOCITY_OF_MOVE])
 
   useEventListener('keydown', ({key}: any) => {
-    switch (key) {
-      case 'ArrowLeft':
-        setIsArrowLeftPress(true)
-        break
-      case 'ArrowRight':
-        setIsArrowRightPress(true)
-        break
-      case 'ArrowDown':
-        // setHERO_HEIGHT(HERO_SIZE_HEIGHT*0.75)
-        setHERO_SIZE(HERO_SIZE_HEIGHT_IMG*0.75)
-        setIsArrowDownPress(true)
-        break
-      case 'ArrowUp':
-        setIsArrowUpPress(true)
-        break
-      case ' ':
-        setIsArrowSpacePress(true)
-        break
+    if (!END_GAME) {
+      switch (key) {
+        case 'ArrowLeft':
+          setIsArrowLeftPress(true)
+          break
+        case 'ArrowRight':
+          setIsArrowRightPress(true)
+          break
+        case 'ArrowDown':
+          // setHERO_HEIGHT(HERO_SIZE_HEIGHT*0.75)
+          setHERO_SIZE(HERO_SIZE_HEIGHT_IMG*0.75)
+          setIsArrowDownPress(true)
+          break
+        case 'ArrowUp':
+          setIsArrowUpPress(true)
+          break
+        case ' ':
+          setIsArrowSpacePress(true)
+          break
+      }
     }
   })
 
   useEventListener('keyup', ({key}: any) => {
-    switch (key) {
-      case 'ArrowLeft':
-        clearInterval(intervalLeft.current)
-        setVELOCITY_OF_MOVE(0)
-        // setHERO_WIDTH(HERO_SIZE_WIDTH)
-        setIsArrowLeftPress(false)
-        break
-      case 'ArrowRight':
-        clearInterval(intervalLeft.current)
-        setVELOCITY_OF_MOVE(0)
-        // setHERO_WIDTH(HERO_SIZE_WIDTH)
-        setIsArrowRightPress(false)
-        break
-      case 'ArrowDown':
-        setHERO_SIZE(HERO_SIZE_HEIGHT_IMG)
-        setIsArrowDownPress(false)
-        break
-      case 'ArrowUp':
-        setIsArrowUpPress(false)
-        break
-      case ' ':
-        setIsArrowSpacePress(false)
-        break
+    if (!END_GAME) {
+      switch (key) {
+        case 'ArrowLeft':
+          clearInterval(intervalLeft.current)
+          setVELOCITY_OF_MOVE(0)
+          // setHERO_WIDTH(HERO_SIZE_WIDTH)
+          setIsArrowLeftPress(false)
+          break
+        case 'ArrowRight':
+          clearInterval(intervalLeft.current)
+          setVELOCITY_OF_MOVE(0)
+          // setHERO_WIDTH(HERO_SIZE_WIDTH)
+          setIsArrowRightPress(false)
+          break
+        case 'ArrowDown':
+          setHERO_SIZE(HERO_SIZE_HEIGHT_IMG)
+          setIsArrowDownPress(false)
+          break
+        case 'ArrowUp':
+          setIsArrowUpPress(false)
+          break
+        case ' ':
+          setIsArrowSpacePress(false)
+          break
+      }
     }
   })
 

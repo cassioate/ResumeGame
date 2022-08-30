@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
-import { END_GAME, GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT_HIT_BOX, 
+import { GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT_HIT_BOX, 
   HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_HIT_BOX, 
   MAX_JUMP, START_FLOOR, START_POSITION } from "../settings/constants";
 

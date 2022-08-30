@@ -8,7 +8,7 @@ export const HERO_SIZE_HEIGHT_HIT_BOX = 5
 // POSITIONS
 export const START_POSITION = 50
 export const START_FLOOR = 30
-export const END_GAME = 0
+export const END_GAME_CONSTANT = 0
 export const GAME_BOX_RANGE_FINAL = 800-HERO_SIZE_WIDTH_HIT_BOX
 export const GAME_BOX_RANGE_INITIAL = 0
 export const POSITION_Y_TO_DIE = -3
