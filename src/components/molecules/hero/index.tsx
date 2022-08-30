@@ -7,7 +7,7 @@ import { KeyboardContext } from '../../../context/keyboardContext';
 
 export const Hero = () => {
   const [HERO_IMG, setHERO_IMG] = useState(0);
-  const {POSITION_Y, POSITION_X, HERO_SIZE, FLOOR} = useContext(HeroMoveContext);
+  const {POSITION_Y, POSITION_X, HERO_SIZE, FLOOR, HIT_BOX_HERO_HEIGHT, HIT_BOX_HERO_WIDTH} = useContext(HeroMoveContext);
   const [HERO_IMG_SRC_ACTIVED, setHERO_IMG_SRC_ACTIVED] = useState(HERO_IMG_STOPPED)
   const {isArrowRightPress, isArrowLeftPress, isArrowSpacePress, isArrowUpPress} = useContext(KeyboardContext)
   const [HERO_DIRECTION, setHERO_DIRECTION] = useState('RIGHT')
@@ -37,8 +37,8 @@ export const Hero = () => {
       id='HeroHitBox'
       bottom={POSITION_Y}
       left={POSITION_X}
-      width={25}
-      height={HERO_SIZE === HERO_SIZE_HEIGHT_IMG ? 55 : 45}
+      width={HIT_BOX_HERO_WIDTH}
+      height={HERO_SIZE === HERO_SIZE_HEIGHT_IMG ? HIT_BOX_HERO_HEIGHT : HIT_BOX_HERO_HEIGHT-15}
       direction={HERO_DIRECTION}
     >
       <HeroStyled

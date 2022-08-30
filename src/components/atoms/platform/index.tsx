@@ -10,11 +10,7 @@ interface PropsPlatform {
 }
 
 export const Platform = ({bottom, width, height, left, img}: PropsPlatform) => {
-  const [platformImg, setPlatformImg] = useState(img)
 
-  useEffect(() => {
-  }, [platformImg])
-  
   return (
     <HitBoxPlatform
       id='HitBoxPlatform'
@@ -27,7 +23,7 @@ export const Platform = ({bottom, width, height, left, img}: PropsPlatform) => {
         id='PlatformImg'
         width={width+5}
         height={height+2}
-        src={platformImg}
+        src={img}
       /> 
     </HitBoxPlatform>
   );

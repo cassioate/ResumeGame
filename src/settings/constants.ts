@@ -2,8 +2,8 @@
 // HERO SIZE/HITBOX
 export const HERO_SIZE_WIDTH_IMG = 100
 export const HERO_SIZE_HEIGHT_IMG = 100
-export const HERO_SIZE_WIDTH_HIT_BOX = 25
-export const HERO_SIZE_HEIGHT_HIT_BOX = 5
+export const HERO_SIZE_WIDTH_HIT_BOX = 15
+export const HERO_SIZE_HEIGHT_HIT_BOX = 55
 
 // POSITIONS
 export const START_POSITION = 50
