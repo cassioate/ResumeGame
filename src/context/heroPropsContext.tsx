@@ -1,7 +1,9 @@
 import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
+import { useContext } from "react";
 import { GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT_HIT_BOX, 
   HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_HIT_BOX, 
   MAX_JUMP, START_FLOOR, START_POSITION } from "../settings/constants";
+import { GameContext } from "./gameContext";
 
 interface IProps {
   children: ReactElement;
@@ -38,46 +40,59 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
   const [HERO_SIZE, setHERO_SIZE] = useState(HERO_SIZE_HEIGHT_IMG)
   const [OUT_OF_PLATFORM, setOUT_OF_PLATFORM] = useState(false)
   const [FLOOR, setFLOOR] = useState(START_FLOOR)
+  const { END_GAME } = useContext(GameContext)
 
   // Gravity
   useEffect(() => {
-    if (POSITION_Y > FLOOR && GRAVITY_ON){
-      const timeId = setInterval(() => {   
-        setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
-      }, 20)
-      return () => {
-        clearInterval(timeId)
+    if (!END_GAME) {
+      if (POSITION_Y > FLOOR && GRAVITY_ON){
+        const timeId = setInterval(() => {   
+          setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
+        }, 20)
+        return () => {
+          clearInterval(timeId)
+        }
+      } else if (OUT_OF_PLATFORM){
+        const timeId = setInterval(() => {   
+          setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
+        }, 20)
+        return () => {
+          clearInterval(timeId)
+        }
       }
-    } else if (OUT_OF_PLATFORM){
-      const timeId = setInterval(() => {   
-        setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
-      }, 20)
-      return () => {
-        clearInterval(timeId)
+      if (POSITION_Y < FLOOR && !OUT_OF_PLATFORM){
+        setPOSITION_Y(FLOOR)
       }
-    }
-    if (POSITION_Y < FLOOR && !OUT_OF_PLATFORM){
-      setPOSITION_Y(FLOOR)
     }
   }, [POSITION_Y, GRAVITY_ON, OUT_OF_PLATFORM, FLOOR])
 
   // Jumping
   useEffect(() => {
-    if (POSITION_Y >= MAX_JUMP) {
-      setGRAVITY_ON(true)
-    } else if (POSITION_Y === FLOOR) {
-      setGRAVITY_ON(false)
-    } 
-
-    if (POSITION_Y > FLOOR && !GRAVITY_ON){
-      const timeId = setInterval(() => {   
-        setPOSITION_Y((POSITION_Y+5)*GRAVITY_UP);
-      }, 20)
-      return () => {
-        clearInterval(timeId)
+    if (!END_GAME) {
+      if (POSITION_Y >= MAX_JUMP) {
+        setGRAVITY_ON(true)
+      } else if (POSITION_Y === FLOOR) {
+        setGRAVITY_ON(false)
+      } 
+  
+      if (POSITION_Y > FLOOR && !GRAVITY_ON){
+        const timeId = setInterval(() => {   
+          setPOSITION_Y((POSITION_Y+5)*GRAVITY_UP);
+        }, 20)
+        return () => {
+          clearInterval(timeId)
+        }
       }
     }
   }, [POSITION_Y, GRAVITY_ON])
+
+  // RESET THE GAME
+  useEffect(() => {
+    setPOSITION_X(START_POSITION)
+    setPOSITION_Y(START_FLOOR)
+    setOUT_OF_PLATFORM(false)
+    setVELOCITY_OF_MOVE(0)
+  }, [END_GAME])
 
   return (
     <HeroMoveContext.Provider value={{

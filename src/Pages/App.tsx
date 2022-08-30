@@ -10,18 +10,18 @@ import { GameContextProvider } from '../context/gameContext';
 export const App = () => {
   return (
       <AppStyled>
-        <MoveHeroContextProvider>
-          <KeyboardContextProvider>
-            <>
-              <Header/>
-                <GameContextProvider>
-                  <ResumeGame/>
-                </GameContextProvider>
-              <Footer>
-              </Footer>
-            </>   
-            </KeyboardContextProvider>        
-        </MoveHeroContextProvider>
+        <GameContextProvider>
+          <MoveHeroContextProvider>
+            <KeyboardContextProvider>
+              <>
+                <Header/>
+                    <ResumeGame/>
+                <Footer>
+                </Footer>
+              </>   
+              </KeyboardContextProvider>        
+          </MoveHeroContextProvider>
+        </GameContextProvider>
       </AppStyled>
   );
 }
