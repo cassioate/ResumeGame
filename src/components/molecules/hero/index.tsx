@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import React from 'react';
 import { HeroMoveContext } from '../../../context/heroPropsContext';
 import {HeroStyled, HeroHitBox} from './styles';
-import { FLOOR, HERO_IMG_JUMP, HERO_IMG_STOPPED, HERO_IMG_WALK, HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_IMG } from '../../../settings/constants';
+import { HERO_IMG_JUMP, HERO_IMG_STOPPED, HERO_IMG_WALK, HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_IMG } from '../../../settings/constants';
 import { KeyboardContext } from '../../../context/keyboardContext';
 
 export const Hero = () => {
   const [HERO_IMG, setHERO_IMG] = useState(0);
-  const {POSITION_Y, POSITION_X, VELOCITY_OF_MOVE, HERO_SIZE} = useContext(HeroMoveContext);
+  const {POSITION_Y, POSITION_X, HERO_SIZE, FLOOR} = useContext(HeroMoveContext);
   const [HERO_IMG_SRC_ACTIVED, setHERO_IMG_SRC_ACTIVED] = useState(HERO_IMG_STOPPED)
-  const {isArrowRightPress, isArrowLeftPress, isArrowSpacePress, isArrowUpPress, isArrowDownPress} = useContext(KeyboardContext)
+  const {isArrowRightPress, isArrowLeftPress, isArrowSpacePress, isArrowUpPress} = useContext(KeyboardContext)
   const [HERO_DIRECTION, setHERO_DIRECTION] = useState('RIGHT')
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export const Hero = () => {
 
   return (
     <HeroHitBox
+      id='HeroHitBox'
       bottom={POSITION_Y}
       left={POSITION_X}
       width={25}
@@ -41,6 +42,7 @@ export const Hero = () => {
       direction={HERO_DIRECTION}
     >
       <HeroStyled
+        id='HeroImg'
         width={HERO_SIZE_WIDTH_IMG}
         height={HERO_SIZE}
         src={`${HERO_IMG_SRC_ACTIVED+HERO_IMG}.png`}

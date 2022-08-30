@@ -1,16 +1,31 @@
 import styled from 'styled-components'
 
-interface PropsPlatformsImg {
-  bottom: number
-  left: number
+interface PropsHitBox {
+  bottom: number;
+  left: number;
+  width: number;
+  height: number;
 }
 
-export const PlatformStyled = styled.img.attrs<PropsPlatformsImg>((props) => ({
+export const HitBoxPlatform = styled.div.attrs<PropsHitBox>((props) => ({
   style: {
-    bottom: props.bottom+'%',
-    left: props.left+'%',
+    width: props.width,
+    height: props.height,
+    bottom: props.bottom+'px',
+    left: props.left+'px',
   }
-}))<PropsPlatformsImg>`
-  position: absolute;
+}))<PropsHitBox>`
   border-bottom-left-radius: 50px;
+  position: absolute;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+`
+
+export const PlatformImgStyled = styled.img`
+  src: ${props => props.src};
+  position: absolute;
 `

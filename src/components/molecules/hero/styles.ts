@@ -3,9 +3,6 @@ import styled from 'styled-components'
 export const HeroStyled = styled.img`
   src: ${props => props.src};
   position: absolute;
-  /* object-fit: cover;
-  object-position: -25px -30px; */
-
 `
 
 interface PropsHero {
@@ -20,8 +17,8 @@ export const HeroHitBox = styled.div.attrs<PropsHero>((props) => ({
   style: {
     width: props.width,
     height: props.height,
-    bottom: props.bottom+'%',
-    left: props.left+'%',
+    bottom: props.bottom+'px',
+    left: props.left+'px',
     transform: `scaleX(${props.direction === 'RIGHT' ? 1 : -1})`
   }
 }))<PropsHero>`

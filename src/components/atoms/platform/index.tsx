@@ -1,21 +1,35 @@
-import React from 'react';
-import{PlatformStyled} from './styles';
+import React, { useEffect, useState } from 'react';
+import{HitBoxPlatform, PlatformImgStyled} from './styles';
 
-export const Platform = () => {
+interface PropsPlatform {
+  bottom: number;
+  width: number;
+  height: number;
+  left: number;
+  img: string;
+}
+
+export const Platform = ({bottom, width, height, left, img}: PropsPlatform) => {
+  const [platformImg, setPlatformImg] = useState(img)
+
+  useEffect(() => {
+  }, [platformImg])
+  
   return (
-    // <PlatformContainer
-    //   width={150}
-    //   height={30}
-    //   color={'white'}
-    // >
-      <PlatformStyled
-        bottom={0}
-        width={150}
-        height={30}
-        left={0}
-        src={`./assets/platforms/platform1.png`}
+    <HitBoxPlatform
+      id='HitBoxPlatform'
+      bottom={bottom}
+      width={width}
+      height={height}
+      left={left}
+    >
+      <PlatformImgStyled
+        id='PlatformImg'
+        width={width+5}
+        height={height+2}
+        src={platformImg}
       /> 
-    // </PlatformContainer>
+    </HitBoxPlatform>
   );
 }
 

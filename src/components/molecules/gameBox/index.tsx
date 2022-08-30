@@ -3,8 +3,8 @@ import { GameBoxStyled } from './gameBox';
 
 export const GameBox = ({children}: any) => {
   return (
-      <GameBoxStyled>
-        {children}
-      </GameBoxStyled>
+    <GameBoxStyled id='GameBox'>
+      {children}
+    </GameBoxStyled>
   );
 }

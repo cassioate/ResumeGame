@@ -6,4 +6,7 @@ export const GameBoxStyled = styled.div`
   height: 500px;
   display: flex;
   opacity: 100%;
+  border-style: dashed;
+  border-radius: 20px;
+  overflow: hidden;
 `

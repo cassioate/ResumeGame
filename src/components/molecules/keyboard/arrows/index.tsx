@@ -9,22 +9,22 @@ import { ArrowUp } from '../../../atoms/buttons/arrowButtons/arrowUp';
 import useEventListener from '@use-it/event-listener';
 
 import { Container, ContainerArrow } from './styles';
-import { MOVE_RIGHT, MOVE_LEFT, FLOOR, HERO_SIZE_HEIGHT_IMG } from '../../../../settings/constants';
+import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL } from '../../../../settings/constants';
 import { KeyboardContext } from '../../../../context/keyboardContext';
 
 export const Arrows = () => {
   const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, 
-    VELOCITY_OF_MOVE, setVELOCITY_OF_MOVE, setHERO_SIZE } = useContext(HeroMoveContext)
+    VELOCITY_OF_MOVE, setVELOCITY_OF_MOVE, setHERO_SIZE, FLOOR } = useContext(HeroMoveContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
   const intervalLeft = useRef<any>()
 
   // Make move for the Right or the Left inside the GameBox and when press ArrowDown the hero get a smaller size
   useEffect(() => {
-    if (POSITION_X <= 0){
-      setPOSITION_X(0)
-    } else if (POSITION_X >= 90){
-      setPOSITION_X(90)
+    if (POSITION_X <= GAME_BOX_RANGE_INITIAL){
+      setPOSITION_X(1)
+    } else if (POSITION_X >= GAME_BOX_RANGE_FINAL){
+      setPOSITION_X(GAME_BOX_RANGE_FINAL)
     }
     if (VELOCITY_OF_MOVE === 0){
       if (isArrowRightPress){
@@ -48,7 +48,7 @@ export const Arrows = () => {
   // Make a Looping to use the velocity to move the Hero
   useEffect(() => {
     intervalLeft.current = setInterval(() => {   
-      if (POSITION_X >= 0 && POSITION_X <= 90) {
+      if (POSITION_X >= GAME_BOX_RANGE_INITIAL && POSITION_X <= GAME_BOX_RANGE_FINAL) {
         setPOSITION_X(POSITION_X+VELOCITY_OF_MOVE)
       }
     }, 20)
