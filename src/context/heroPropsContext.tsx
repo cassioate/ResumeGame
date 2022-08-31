@@ -51,17 +51,12 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
 
   // Gravity
   useEffect(() => {
+    
     if (!END_GAME) {
-      if (POSITION_Y > FLOOR && GRAVITY_ON){
+      if ((POSITION_Y > FLOOR && GRAVITY_ON) || !IN_PLATFORM){
         const timeId = setInterval(() => {   
-          setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
-        }, 20)
-        return () => {
-          clearInterval(timeId)
-        }
-      } else if (!IN_PLATFORM){
-        const timeId = setInterval(() => {   
-          setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
+          console.log("GRAVITY", MAX_JUMP, POSITION_Y, FLOOR, GRAVITY_ON, IN_PLATFORM)
+          setPOSITION_Y(POSITION_Y-2);
         }, 20)
         return () => {
           clearInterval(timeId)
@@ -71,7 +66,8 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
         setPOSITION_Y(FLOOR)
       }
     }
-  }, [POSITION_Y, GRAVITY_ON, IN_PLATFORM, FLOOR])
+
+  }, [POSITION_Y, GRAVITY_ON, IN_PLATFORM, MAX_JUMP, FLOOR])
 
   // Jumping
   useEffect(() => {
@@ -80,18 +76,18 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
         setGRAVITY_ON(true)
       } else if (POSITION_Y === FLOOR) {
         setGRAVITY_ON(false)
-      } 
-  
+      }
       if (POSITION_Y > FLOOR && !GRAVITY_ON){
         const timeId = setInterval(() => {   
-          setPOSITION_Y((POSITION_Y+5)*GRAVITY_UP);
+          console.log("JUMP", MAX_JUMP, POSITION_Y, FLOOR, GRAVITY_ON, IN_PLATFORM)
+          setPOSITION_Y(POSITION_Y+2);
         }, 20)
         return () => {
           clearInterval(timeId)
         }
       }
     }
-  }, [POSITION_Y, GRAVITY_ON])
+  }, [POSITION_Y, GRAVITY_ON, IN_PLATFORM, MAX_JUMP, FLOOR])
 
   // RESET THE GAME
   useEffect(() => {

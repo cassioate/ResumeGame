@@ -22,7 +22,6 @@ export const Platforms = () => {
   const THIRD_PLATFORM_Y_X: Platform  = {x: 400, y:100, width: 150, height: 30}
   const FOURTH_PLATFORM_Y_X: Platform  = {x: 700, y:250, width: 150, height: 30}
 
-
   const platforms: Platform[] = [
     FIRST_PLATFORM_X_Y,
     SECOND_PLATFORM_X_Y,
@@ -36,20 +35,19 @@ export const Platforms = () => {
       if (
         POSITION_X + HERO_SIZE_WIDTH_HIT_BOX >= platform.x && 
         POSITION_X <= platform.x + platform.width &&
-        POSITION_Y <= platform.y + platform.height 
+        POSITION_Y >= platform.y + platform.height 
         ) {
-        validatorPlatform.push(platform)
+          setFLOOR(platform.y + platform.height)
+          setMAX_JUMP(platform.y + platform.height + START_MAX_JUMP)
+          setIN_PLATFORM(true)
+          validatorPlatform.push(platform)
       }
     })
-    if (validatorPlatform.length > 0){
-      setMAX_JUMP(validatorPlatform[0].height + START_MAX_JUMP)
-      setIN_PLATFORM(true)
-      setFLOOR(validatorPlatform[0].y + validatorPlatform[0].height)
-    } else {
+    if (validatorPlatform.length === 0) {
       setIN_PLATFORM(false)
       setFLOOR(START_FLOOR)
+      setMAX_JUMP(START_MAX_JUMP)
     }
-    console.log(validatorPlatform)
   }, [POSITION_X, POSITION_Y])
 
   useEffect(() => {
