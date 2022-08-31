@@ -14,7 +14,7 @@ interface Platform {
 
 export const Platforms = () => {
 
-  const { POSITION_Y, POSITION_X, IN_PLATFORM, setIN_PLATFORM, setFLOOR, setMAX_JUMP} = useContext(HeroMoveContext)
+  const { POSITION_Y, POSITION_X, IN_PLATFORM, FLOOR, setIN_PLATFORM, setFLOOR, setMAX_JUMP} = useContext(HeroMoveContext)
   const { setEND_GAME } = useContext(GameContext)
 
   const FIRST_PLATFORM_X_Y: Platform = {x: 0, y:0, width: 150, height: 30}
@@ -38,15 +38,19 @@ export const Platforms = () => {
         POSITION_Y >= platform.y + platform.height 
         ) {
           setFLOOR(platform.y + platform.height)
-          setMAX_JUMP(platform.y + platform.height + START_MAX_JUMP)
-          setIN_PLATFORM(true)
+          if (POSITION_Y === FLOOR) {
+            setMAX_JUMP(platform.y + platform.height + START_MAX_JUMP)
+            setIN_PLATFORM(true)
+          }
           validatorPlatform.push(platform)
       }
     })
     if (validatorPlatform.length === 0) {
-      setIN_PLATFORM(false)
-      setFLOOR(START_FLOOR)
-      setMAX_JUMP(START_MAX_JUMP)
+      if (POSITION_Y === FLOOR) {
+        setIN_PLATFORM(false)
+        setFLOOR(START_FLOOR)
+        setMAX_JUMP(START_MAX_JUMP)
+      }
     }
   }, [POSITION_X, POSITION_Y])
 

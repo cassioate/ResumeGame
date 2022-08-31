@@ -51,7 +51,6 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
 
   // Gravity
   useEffect(() => {
-    
     if (!END_GAME) {
       if ((POSITION_Y > FLOOR && GRAVITY_ON) || !IN_PLATFORM){
         const timeId = setInterval(() => {   
@@ -66,7 +65,6 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
         setPOSITION_Y(FLOOR)
       }
     }
-
   }, [POSITION_Y, GRAVITY_ON, IN_PLATFORM, MAX_JUMP, FLOOR])
 
   // Jumping
@@ -74,10 +72,10 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
     if (!END_GAME) {
       if (POSITION_Y >= MAX_JUMP) {
         setGRAVITY_ON(true)
-      } else if (POSITION_Y === FLOOR) {
+      } else if (POSITION_Y <= FLOOR) {
         setGRAVITY_ON(false)
       }
-      if (POSITION_Y > FLOOR && !GRAVITY_ON){
+      if (POSITION_Y > FLOOR && !GRAVITY_ON && IN_PLATFORM){
         const timeId = setInterval(() => {   
           console.log("JUMP", MAX_JUMP, POSITION_Y, FLOOR, GRAVITY_ON, IN_PLATFORM)
           setPOSITION_Y(POSITION_Y+2);
