@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
 import { useContext } from "react";
 import { GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT_HIT_BOX, 
   HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_HIT_BOX, 
-  MAX_JUMP, START_FLOOR, START_POSITION } from "../settings/constants";
+  START_MAX_JUMP, START_FLOOR, START_POSITION } from "../settings/constants";
 import { GameContext } from "./gameContext";
 
 interface IProps {
@@ -17,7 +18,9 @@ interface IHeroMoveContext {
   HIT_BOX_HERO_HEIGHT: number;
   HERO_SIZE: number;
   FLOOR: number;
+  MAX_JUMP: number;
   OUT_OF_PLATFORM: boolean;
+  IN_PLATFORM: boolean;
   setPOSITION_Y: (position: number) => void;
   setPOSITION_X: (position: number) => void;
   setVELOCITY_OF_MOVE: (velocity: number) => void;
@@ -25,12 +28,16 @@ interface IHeroMoveContext {
   setHIT_BOX_HERO_HEIGHT: (height: number) => void;
   setHERO_SIZE: (size: number) => void;
   setOUT_OF_PLATFORM: (out: boolean) => void;
+  setIN_PLATFORM: (out: boolean) => void;
   setFLOOR: (floor: number) => void;
+  setMAX_JUMP: (floor: number) => void;
 }
 
 export const HeroMoveContext = React.createContext({} as IHeroMoveContext);
 
 export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) => {
+  const [IN_PLATFORM, setIN_PLATFORM] = useState(false);
+  const [MAX_JUMP, setMAX_JUMP] = useState(START_MAX_JUMP);
   const [POSITION_Y, setPOSITION_Y] = useState(START_FLOOR);
   const [POSITION_X, setPOSITION_X] = useState(START_POSITION);
   const [GRAVITY_ON, setGRAVITY_ON] = useState(false)
@@ -52,7 +59,7 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
         return () => {
           clearInterval(timeId)
         }
-      } else if (OUT_OF_PLATFORM){
+      } else if (!IN_PLATFORM){
         const timeId = setInterval(() => {   
           setPOSITION_Y((POSITION_Y-2)*GRAVITY_DOWN);
         }, 20)
@@ -60,11 +67,11 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
           clearInterval(timeId)
         }
       }
-      if (POSITION_Y < FLOOR && !OUT_OF_PLATFORM){
+      if (POSITION_Y < FLOOR && IN_PLATFORM){
         setPOSITION_Y(FLOOR)
       }
     }
-  }, [POSITION_Y, GRAVITY_ON, OUT_OF_PLATFORM, FLOOR])
+  }, [POSITION_Y, GRAVITY_ON, IN_PLATFORM, FLOOR])
 
   // Jumping
   useEffect(() => {
@@ -96,9 +103,9 @@ export const MoveHeroContextProvider: FunctionComponent<IProps> = ({children}) =
 
   return (
     <HeroMoveContext.Provider value={{
-      POSITION_Y, POSITION_X, VELOCITY_OF_MOVE, HIT_BOX_HERO_WIDTH, 
-      HIT_BOX_HERO_HEIGHT, HERO_SIZE, OUT_OF_PLATFORM, FLOOR,
-      setPOSITION_Y, setPOSITION_X, setVELOCITY_OF_MOVE, setFLOOR,
+      POSITION_Y, POSITION_X, VELOCITY_OF_MOVE, HIT_BOX_HERO_WIDTH, MAX_JUMP,
+      HIT_BOX_HERO_HEIGHT, HERO_SIZE, OUT_OF_PLATFORM, FLOOR, IN_PLATFORM,
+      setPOSITION_Y, setPOSITION_X, setVELOCITY_OF_MOVE, setFLOOR, setIN_PLATFORM, setMAX_JUMP,
       setHIT_BOX_HERO_WIDTH, setHIT_BOX_HERO_HEIGHT, setHERO_SIZE, setOUT_OF_PLATFORM
     }}>
       {children}

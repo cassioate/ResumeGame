@@ -18,7 +18,7 @@ export const GRAVITY_DOWN = 0.97
 export const GRAVITY_UP = 0.97
 
 // MOVEMENTS
-export const MAX_JUMP = 110
+export const START_MAX_JUMP = 110
 export const MOVE_LEFT = 2
 export const MOVE_RIGHT = 2
 

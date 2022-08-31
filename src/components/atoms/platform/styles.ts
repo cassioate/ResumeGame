@@ -15,7 +15,7 @@ export const HitBoxPlatform = styled.div.attrs<PropsHitBox>((props) => ({
     left: props.left+'px',
   }
 }))<PropsHitBox>`
-  border-bottom-left-radius: 50px;
+  /* border-bottom-left-radius: 50px; */
   position: absolute;
   border-style: solid;
   display: flex;
