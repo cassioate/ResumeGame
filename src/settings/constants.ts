@@ -11,14 +11,14 @@ export const START_FLOOR = 30
 export const END_GAME_CONSTANT = 0
 export const GAME_BOX_RANGE_FINAL = 800-HERO_SIZE_WIDTH_HIT_BOX
 export const GAME_BOX_RANGE_INITIAL = 0
-export const POSITION_Y_TO_DIE = -3
+export const POSITION_Y_TO_DIE = -50
 
 // GRAVITY
 export const GRAVITY_DOWN = 0.97
 export const GRAVITY_UP = 0.97
 
 // MOVEMENTS
-export const START_MAX_JUMP = 110
+export const START_MAX_JUMP = 50
 export const MOVE_LEFT = 2
 export const MOVE_RIGHT = 2
 

@@ -12,7 +12,7 @@ interface IHeroMoveContext {
 export const GameContext = React.createContext({} as IHeroMoveContext);
 
 export const GameContextProvider: FunctionComponent<IProps> = ({children}) => {
-  const [END_GAME, setEND_GAME] = useState(true)
+  const [END_GAME, setEND_GAME] = useState(false)
 
   return (
     <GameContext.Provider value={{

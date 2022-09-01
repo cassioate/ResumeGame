@@ -18,15 +18,29 @@ export const Platforms = () => {
   const { setEND_GAME } = useContext(GameContext)
 
   const FIRST_PLATFORM_X_Y: Platform = {x: 0, y:0, width: 150, height: 30}
-  const SECOND_PLATFORM_X_Y: Platform  = {x: 200, y:50, width: 150, height: 30}
-  const THIRD_PLATFORM_Y_X: Platform  = {x: 400, y:100, width: 150, height: 30}
-  const FOURTH_PLATFORM_Y_X: Platform  = {x: 700, y:250, width: 150, height: 30}
+  const SECOND_PLATFORM_X_Y: Platform  = {x: 200, y:0, width: 150, height: 30}
+  const THIRD_PLATFORM_Y_X: Platform  = {x: 400, y:0, width: 150, height: 30}
+  const FOURTH_PLATFORM_Y_X: Platform  = {x: 600, y:0, width: 150, height: 30}
+  const FIFTH_PLATFORM_Y_X: Platform  = {x: 500, y:40, width: 150, height: 30}
+
+  // DEATHS
+  const DEATH_SPIKE_1: Platform  = {x: 10, y:30, width: 80, height: 30}
+  // const WALL_RIGHT: Platform  = {x: 790, y:-80, width: 50, height: 600}
+  // const WALL_TOP: Platform  = {x: 0, y:480, width: 500, height: 50}
+  // const WALL_TOP_2: Platform  = {x: 400, y:480, width: 500, height: 50}
+  
+  // DECORATIVOS
+  const WALL_LEFT: Platform  = {x: -45, y:-80, width: 50, height: 600}
+  const WALL_RIGHT: Platform  = {x: 790, y:-80, width: 50, height: 600}
+  const WALL_TOP: Platform  = {x: 0, y:480, width: 500, height: 50}
+  const WALL_TOP_2: Platform  = {x: 400, y:480, width: 500, height: 50}
 
   const platforms: Platform[] = [
     FIRST_PLATFORM_X_Y,
     SECOND_PLATFORM_X_Y,
     THIRD_PLATFORM_Y_X,
-    FOURTH_PLATFORM_Y_X
+    FOURTH_PLATFORM_Y_X,
+    FIFTH_PLATFORM_Y_X,
   ]
   
   const validatorPlatform: Platform[] = []
@@ -90,6 +104,61 @@ export const Platforms = () => {
         height={FOURTH_PLATFORM_Y_X.height}
         img={'./assets/platforms/platform1.png'}
       />
+      <Platform
+        bottom={FIFTH_PLATFORM_Y_X.y}
+        left={FIFTH_PLATFORM_Y_X.x}
+        width={FIFTH_PLATFORM_Y_X.width}
+        height={FIFTH_PLATFORM_Y_X.height}
+        img={'./assets/platforms/platform1.png'}
+      />
+
+
+
+
+      {/* DEATH */}
+      <Platform
+        bottom={DEATH_SPIKE_1.y}
+        left={DEATH_SPIKE_1.x}
+        width={DEATH_SPIKE_1.width}
+        height={DEATH_SPIKE_1.height}
+        img={'./assets/platforms/spike1.png'}
+      />
+      {/* DEATH */}
+
+
+
+      {/* DECORATIVOS */}
+      <Platform
+        bottom={WALL_LEFT.y}
+        left={WALL_LEFT.x}
+        width={WALL_LEFT.width}
+        height={WALL_LEFT.height}
+        img={'./assets/platforms/wall1.png'}
+      />
+      <Platform
+        bottom={WALL_RIGHT.y}
+        left={WALL_RIGHT.x}
+        width={WALL_RIGHT.width}
+        height={WALL_RIGHT.height}
+        img={'./assets/platforms/wall1.png'}
+      />
+      <Platform
+        rotate={180}
+        bottom={WALL_TOP.y}
+        left={WALL_TOP.x}
+        width={WALL_TOP.width}
+        height={WALL_TOP.height}
+        img={'./assets/platforms/platform3.png'}
+      />
+      <Platform
+        rotate={180}
+        bottom={WALL_TOP_2.y}
+        left={WALL_TOP_2.x}
+        width={WALL_TOP_2.width}
+        height={WALL_TOP_2.height}
+        img={'./assets/platforms/platform3.png'}
+      />
+      {/* DECORATIVOS */}
     </>
   );
 }
