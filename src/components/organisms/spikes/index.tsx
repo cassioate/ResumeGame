@@ -31,9 +31,18 @@ export const Spikes = () => {
   const SPIKE_SIX_2: SpikesI  = {x: 700, y:10, width: 60, height: 40}
 
   const platforms: SpikesI[] = [
-    // SPIKE_ONE,
-    // SPIKE_TWO,
-    // SPIKE_THREE
+    SPIKE_ONE,
+    SPIKE_TWO,
+    SPIKE_THREE,
+    SPIKE_FOUR,
+    SPIKE_FIVE,
+    SPIKE_SIX,
+    SPIKE_ONE_2,
+    SPIKE_TWO_2,
+    SPIKE_THREE_2,
+    SPIKE_FOUR_2,
+    SPIKE_FIVE_2,
+    SPIKE_SIX_2
   ]
   
   const touchSpikeValidator: SpikesI[] = []
