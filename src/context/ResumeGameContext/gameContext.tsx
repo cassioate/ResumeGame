@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
+import React, { FunctionComponent, ReactElement, useState } from "react";
 
 interface IProps {
   children: ReactElement;

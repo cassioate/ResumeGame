@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef } from "react";
-import { GameContext } from "../../../context/gameContext";
-import { HeroMoveContext } from "../../../context/heroPropsContext";
+import { GameContext } from "../../../context/ResumeGameContext/gameContext";
+import { HeroMoveContext } from "../../../context/ResumeGameContext/heroPropsContext";
 import { HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
 import { Platform } from "../../atoms/platform";
 

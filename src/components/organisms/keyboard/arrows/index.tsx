@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { HeroMoveContext } from '../../../../context/heroPropsContext';
 import { SpaceKeyboard } from '../../../atoms/buttons/arrowButtons/aKeyboardSpace';
 import { ArrowDown } from '../../../atoms/buttons/arrowButtons/arrowDown';
 import { ArrowLeft } from '../../../atoms/buttons/arrowButtons/arrowLeft';
@@ -10,8 +9,9 @@ import useEventListener from '@use-it/event-listener';
 
 import { Container, ContainerArrow } from './styles';
 import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL } from '../../../../settings/constants';
-import { KeyboardContext } from '../../../../context/keyboardContext';
-import { GameContext } from '../../../../context/gameContext';
+import { GameContext } from '../../../../context/ResumeGameContext/gameContext';
+import { HeroMoveContext } from '../../../../context/ResumeGameContext/heroPropsContext';
+import { KeyboardContext } from '../../../../context/ResumeGameContext/keyboardContext';
 
 export const Arrows = () => {
   const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, 

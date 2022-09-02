@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import{ButtonIconArrowDown} from './styles';
 import { FiArrowDown } from "react-icons/fi"
 import useEventListener from '@use-it/event-listener';
-import { KeyboardContext } from '../../../../../context/keyboardContext';
+import { KeyboardContext } from '../../../../../context/ResumeGameContext/keyboardContext';
 
 export const ArrowDown = () => {
   const { setIsArrowDownPress } = useContext(KeyboardContext)

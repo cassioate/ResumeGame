@@ -1,7 +1,7 @@
 import useEventListener from '@use-it/event-listener';
 import React, { useContext } from 'react';
 import { MdSpaceBar } from "react-icons/md"
-import { KeyboardContext } from '../../../../../context/keyboardContext';
+import { KeyboardContext } from '../../../../../context/ResumeGameContext/keyboardContext';
 import { ButtonIconSpace } from './styles';
 
 export const SpaceKeyboard = () => { 

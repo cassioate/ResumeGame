@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
 import { useContext } from "react";
-import { GRAVITY_DOWN, GRAVITY_UP, HERO_SIZE_HEIGHT_HIT_BOX, 
-  HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_HIT_BOX, 
-  START_MAX_JUMP, START_FLOOR, START_POSITION } from "../settings/constants";
+import { START_MAX_JUMP, START_FLOOR, START_POSITION, HERO_SIZE_WIDTH_HIT_BOX,
+  HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_HEIGHT_IMG } from "../../settings/constants";
 import { GameContext } from "./gameContext";
 
 interface IProps {

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { GameContext, GameContextProvider } from '../../../context/gameContext';
+import { GameContext, GameContextProvider } from '../../../context/ResumeGameContext/gameContext';
 import { BackGround } from '../../atoms/background';
-import { GameBox } from '../../molecules/gameBox';
-import { Hero } from '../../molecules/hero';
-import { Arrows } from '../../molecules/keyboard/arrows';
-import { Platforms } from '../../molecules/platforms';
+import { GameBox } from '../../atoms/gameBox';
+import { Hero } from '../hero';
+import { Arrows } from '../keyboard/arrows';
+import { Platforms } from '../platforms';
 import { StartGame } from '../../molecules/startGame';
 import { Container } from './styles';
 
-export const ResumeGame = () => {
+export const Game = () => {
   const { END_GAME } = useContext(GameContext)
 
   useEffect(() => {

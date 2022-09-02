@@ -1,27 +1,15 @@
 import React from 'react';
-import { Footer } from '../components/organisms/footer';
+import { Footer } from '../components/molecules/footer';
+import { Header } from '../components/molecules/header';
 import { AppStyled } from './App-styled';
-import { Header } from '../components/organisms/header';
-import { MoveHeroContextProvider } from '../context/heroPropsContext';
-import { KeyboardContextProvider } from '../context/keyboardContext';
-import { ResumeGame } from '../components/organisms/resumeGame';
-import { GameContextProvider } from '../context/gameContext';
+import { ResumeGame } from './ResumeGame/ResumeGame';
 
 export const App = () => {
   return (
       <AppStyled>
-        <GameContextProvider>
-          <MoveHeroContextProvider>
-            <KeyboardContextProvider>
-              <>
-                <Header/>
-                    <ResumeGame/>
-                <Footer>
-                </Footer>
-              </>   
-              </KeyboardContextProvider>        
-          </MoveHeroContextProvider>
-        </GameContextProvider>
+        <Header/>
+        <ResumeGame/>
+        <Footer/>
       </AppStyled>
   );
 }

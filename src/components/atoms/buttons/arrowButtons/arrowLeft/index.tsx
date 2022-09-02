@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import{ButtonIconArrowLeft} from './styles';
 import { FiArrowLeft } from "react-icons/fi"
 import useEventListener from '@use-it/event-listener';
-import { KeyboardContext } from '../../../../../context/keyboardContext';
-import { HeroMoveContext } from '../../../../../context/heroPropsContext';
+import { HeroMoveContext } from '../../../../../context/ResumeGameContext/heroPropsContext';
+import { KeyboardContext } from '../../../../../context/ResumeGameContext/keyboardContext';
 
 export const ArrowLeft = () => {
   const { setIsArrowLeftPress } = useContext(KeyboardContext)

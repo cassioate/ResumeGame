@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import React from 'react';
-import { HeroMoveContext } from '../../../context/heroPropsContext';
 import {HeroStyled, HeroHitBox} from './styles';
 import { HERO_IMG_JUMP, HERO_IMG_STOPPED, HERO_IMG_WALK, HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_IMG } from '../../../settings/constants';
-import { KeyboardContext } from '../../../context/keyboardContext';
+import { HeroMoveContext } from '../../../context/ResumeGameContext/heroPropsContext';
+import { KeyboardContext } from '../../../context/ResumeGameContext/keyboardContext';
 
 export const Hero = () => {
   const [HERO_IMG, setHERO_IMG] = useState(0);
