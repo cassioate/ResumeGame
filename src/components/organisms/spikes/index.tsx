@@ -16,14 +16,24 @@ export const Spikes = () => {
   const { POSITION_Y, POSITION_X, IN_PLATFORM, FLOOR, setIN_PLATFORM, setFLOOR, setMAX_JUMP} = useContext(HeroMoveContext)
   const { setEND_GAME } = useContext(GameContext)
 
-  const SPIKE_ONE: SpikesI  = {x: 100, y:30, width: 60, height: 20}
-  const SPIKE_TWO: SpikesI  = {x: 200, y:30, width: 60, height: 15}
-  const SPIKE_THREE: SpikesI  = {x: 300, y:30, width: 30, height: 20}
+  const SPIKE_ONE: SpikesI  = {x: 550, y:10, width: 150, height: 40}
+  const SPIKE_TWO: SpikesI  = {x: 550, y:10, width: 150, height: 30}
+  const SPIKE_THREE: SpikesI  = {x: 550, y:10, width: 100, height: 40}
+  const SPIKE_FOUR: SpikesI  = {x: 550, y:20, width: 150, height: 40}
+  const SPIKE_FIVE: SpikesI  = {x: 500, y:20, width: 150, height: 30}
+  const SPIKE_SIX: SpikesI  = {x: 500, y:10, width: 100, height: 40}
+
+  const SPIKE_ONE_2: SpikesI  = {x: 600, y:10, width: 150, height: 40}
+  const SPIKE_TWO_2: SpikesI  = {x: 650, y:10, width: 150, height: 30}
+  const SPIKE_THREE_2: SpikesI  = {x: 650, y:10, width: 60, height: 40}
+  const SPIKE_FOUR_2: SpikesI  = {x: 650, y:10, width: 120, height: 40}
+  const SPIKE_FIVE_2: SpikesI  = {x: 700, y:10, width: 120, height: 30}
+  const SPIKE_SIX_2: SpikesI  = {x: 700, y:10, width: 60, height: 40}
 
   const platforms: SpikesI[] = [
-    SPIKE_ONE,
-    SPIKE_TWO,
-    SPIKE_THREE
+    // SPIKE_ONE,
+    // SPIKE_TWO,
+    // SPIKE_THREE
   ]
   
   const touchSpikeValidator: SpikesI[] = []
@@ -41,10 +51,8 @@ export const Spikes = () => {
     })
     console.log(touchSpikeValidator.length)
     if (touchSpikeValidator.length > 0) {
-      console.log('TOQUEI')
       setEND_GAME(true)
     }
-    console.log('N_TOQUEI')
   }, [POSITION_X, POSITION_Y])
 
   return (
@@ -71,6 +79,80 @@ export const Spikes = () => {
         left={SPIKE_THREE.x}
         width={SPIKE_THREE.width}
         height={SPIKE_THREE.height}
+        img={'./assets/spikes/spike3.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_FOUR.y}
+        left={SPIKE_ONE.x}
+        width={SPIKE_ONE.width}
+        height={SPIKE_ONE.height}
+        img={'./assets/spikes/spike1.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_FIVE.y}
+        left={SPIKE_FIVE.x}
+        width={SPIKE_FIVE.width}
+        height={SPIKE_FIVE.height}
+        img={'./assets/spikes/spike2.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_SIX.y}
+        left={SPIKE_SIX.x}
+        width={SPIKE_SIX.width}
+        height={SPIKE_SIX.height}
+        img={'./assets/spikes/spike3.png'}
+      />
+
+
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_ONE_2.y}
+        left={SPIKE_ONE_2.x}
+        width={SPIKE_ONE_2.width}
+        height={SPIKE_ONE_2.height}
+        img={'./assets/spikes/spike1.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_TWO_2.y}
+        left={SPIKE_TWO_2.x}
+        width={SPIKE_TWO_2.width}
+        height={SPIKE_TWO_2.height}
+        img={'./assets/spikes/spike2.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_THREE_2.y}
+        left={SPIKE_THREE_2.x}
+        width={SPIKE_THREE_2.width}
+        height={SPIKE_THREE_2.height}
+        img={'./assets/spikes/spike3.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_FOUR_2.y}
+        left={SPIKE_ONE_2.x}
+        width={SPIKE_ONE_2.width}
+        height={SPIKE_ONE_2.height}
+        img={'./assets/spikes/spike1.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_FIVE_2.y}
+        left={SPIKE_FIVE_2.x}
+        width={SPIKE_FIVE_2.width}
+        height={SPIKE_FIVE_2.height}
+        img={'./assets/spikes/spike2.png'}
+      />
+      <Spike
+        zIndex={1}
+        bottom={SPIKE_SIX_2.y}
+        left={SPIKE_SIX_2.x}
+        width={SPIKE_SIX_2.width}
+        height={SPIKE_SIX_2.height}
         img={'./assets/spikes/spike3.png'}
       />
     </>

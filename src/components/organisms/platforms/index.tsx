@@ -18,10 +18,11 @@ export const Platforms = () => {
   const { setEND_GAME } = useContext(GameContext)
 
   const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:0, width: 150, height: 30}
-  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:0, width: 150, height: 30}
-  const THIRD_PLATFORM_Y_X: PlatformI  = {x: 400, y:0, width: 150, height: 30}
-  const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 600, y:0, width: 150, height: 30}
-  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 500, y:80, width: 150, height: 30}
+  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:-0, width: 250, height: 250}
+  const THIRD_PLATFORM_Y_X: PlatformI  = {x: 200, y:0, width: 350, height: 30}
+  const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 700, y:10, width: 100, height: 300}
+  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 350, y:400, width: 30, height: 25}
+  const SIXTH_PLATFORM_Y_X: PlatformI  = {x: 550, y:-20, width: 350, height: 30}
   
   const platforms: PlatformI[] = [
     FIRST_PLATFORM_X_Y,
@@ -73,12 +74,12 @@ export const Platforms = () => {
         img={'./assets/platforms/platform1.png'}
       />
       <Platform
-        zIndex={2}
+        zIndex={1}
         bottom={SECOND_PLATFORM_X_Y.y}
         left={SECOND_PLATFORM_X_Y.x}
         width={SECOND_PLATFORM_X_Y.width}
         height={SECOND_PLATFORM_X_Y.height}
-        img={'./assets/platforms/platform1.png'}
+        img={'./assets/platforms/platform2.png'}
       />
       <Platform
         zIndex={2}
@@ -86,7 +87,7 @@ export const Platforms = () => {
         left={THIRD_PLATFORM_Y_X.x}
         width={THIRD_PLATFORM_Y_X.width}
         height={THIRD_PLATFORM_Y_X.height}
-        img={'./assets/platforms/platform1.png'}
+        img={'./assets/platforms/platform3.png'}
       />
       <Platform
         zIndex={2}
@@ -94,7 +95,7 @@ export const Platforms = () => {
         left={FOURTH_PLATFORM_Y_X.x}
         width={FOURTH_PLATFORM_Y_X.width}
         height={FOURTH_PLATFORM_Y_X.height}
-        img={'./assets/platforms/platform1.png'}
+        img={'./assets/platforms/platform4.png'}
       />
       <Platform
         zIndex={2}
@@ -102,7 +103,15 @@ export const Platforms = () => {
         left={FIFTH_PLATFORM_Y_X.x}
         width={FIFTH_PLATFORM_Y_X.width}
         height={FIFTH_PLATFORM_Y_X.height}
-        img={'./assets/platforms/platform1.png'}
+        img={'./assets/platforms/platform5.png'}
+      />
+      <Platform
+        zIndex={2}
+        bottom={SIXTH_PLATFORM_Y_X.y}
+        left={SIXTH_PLATFORM_Y_X.x}
+        width={SIXTH_PLATFORM_Y_X.width}
+        height={SIXTH_PLATFORM_Y_X.height}
+        img={'./assets/platforms/platform3.png'}
       />
     </> 
   );
