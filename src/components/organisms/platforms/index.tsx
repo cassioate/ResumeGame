@@ -18,11 +18,18 @@ export const Platforms = () => {
   const { setEND_GAME } = useContext(GameContext)
 
   const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:0, width: 150, height: 30}
-  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:-0, width: 250, height: 250}
+  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 150, y:30, width: 250, height: 250}
   const THIRD_PLATFORM_Y_X: PlatformI  = {x: 200, y:0, width: 350, height: 30}
   const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 700, y:10, width: 100, height: 300}
-  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 350, y:400, width: 30, height: 25}
-  const SIXTH_PLATFORM_Y_X: PlatformI  = {x: 550, y:-20, width: 350, height: 30}
+  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 550, y:-20, width: 350, height: 30}
+
+  const SUPPORT_PLATFORM_1: PlatformI  = {x: 250, y:50, width: 30, height: 25}
+  const SUPPORT_PLATFORM_2: PlatformI  = {x: 300, y:100, width: 30, height: 25}
+  const SUPPORT_PLATFORM_3: PlatformI  = {x: 250, y:150, width: 30, height: 25}
+  const SUPPORT_PLATFORM_4: PlatformI  = {x: 300, y:200, width: 30, height: 25}
+  const SUPPORT_PLATFORM_5: PlatformI  = {x: 350, y:400, width: 30, height: 25}
+  const SUPPORT_PLATFORM_6: PlatformI  = {x: 350, y:400, width: 30, height: 25}
+  const SUPPORT_PLATFORM_7: PlatformI  = {x: 350, y:400, width: 30, height: 25}
   
   const platforms: PlatformI[] = [
     FIRST_PLATFORM_X_Y,
@@ -30,6 +37,14 @@ export const Platforms = () => {
     THIRD_PLATFORM_Y_X,
     FOURTH_PLATFORM_Y_X,
     FIFTH_PLATFORM_Y_X,
+
+    SUPPORT_PLATFORM_1,
+    SUPPORT_PLATFORM_2,
+    SUPPORT_PLATFORM_3,
+    SUPPORT_PLATFORM_4,
+    SUPPORT_PLATFORM_5,
+    SUPPORT_PLATFORM_6,
+    SUPPORT_PLATFORM_7
   ]
   
   const validatorPlatform: PlatformI[] = []
@@ -40,14 +55,17 @@ export const Platforms = () => {
         POSITION_X <= platform.x + platform.width &&
         POSITION_Y >= platform.y + platform.height
         ) {
-          setFLOOR(platform.y + platform.height)
-          if (POSITION_Y === FLOOR) {
-            setMAX_JUMP(platform.y + platform.height + START_MAX_JUMP)
-            setIN_PLATFORM(true)
-          }
           validatorPlatform.push(platform)
       }
     })
+
+    // Tem que ajeitar essa logica
+    // setFLOOR(platform.y + platform.height)
+    // if (POSITION_Y === FLOOR) {
+    //   setMAX_JUMP(platform.y + platform.height + START_MAX_JUMP)
+    //   setIN_PLATFORM(true)
+    // }
+    console.log(validatorPlatform.length, ' QUANTOS')
     if (validatorPlatform.length === 0) {
       if (POSITION_Y === FLOOR) {
         setIN_PLATFORM(false)
@@ -103,15 +121,66 @@ export const Platforms = () => {
         left={FIFTH_PLATFORM_Y_X.x}
         width={FIFTH_PLATFORM_Y_X.width}
         height={FIFTH_PLATFORM_Y_X.height}
+        img={'./assets/platforms/platform3.png'}
+      />
+
+
+
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_1.y}
+        left={SUPPORT_PLATFORM_1.x}
+        width={SUPPORT_PLATFORM_1.width}
+        height={SUPPORT_PLATFORM_1.height}
         img={'./assets/platforms/platform5.png'}
       />
       <Platform
         zIndex={2}
-        bottom={SIXTH_PLATFORM_Y_X.y}
-        left={SIXTH_PLATFORM_Y_X.x}
-        width={SIXTH_PLATFORM_Y_X.width}
-        height={SIXTH_PLATFORM_Y_X.height}
-        img={'./assets/platforms/platform3.png'}
+        bottom={SUPPORT_PLATFORM_2.y}
+        left={SUPPORT_PLATFORM_2.x}
+        width={SUPPORT_PLATFORM_2.width}
+        height={SUPPORT_PLATFORM_2.height}
+        img={'./assets/platforms/platform5.png'}
+      />
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_3.y}
+        left={SUPPORT_PLATFORM_3.x}
+        width={SUPPORT_PLATFORM_3.width}
+        height={SUPPORT_PLATFORM_3.height}
+        img={'./assets/platforms/platform5.png'}
+      />
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_4.y}
+        left={SUPPORT_PLATFORM_4.x}
+        width={SUPPORT_PLATFORM_4.width}
+        height={SUPPORT_PLATFORM_4.height}
+        img={'./assets/platforms/platform5.png'}
+      />
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_5.y}
+        left={SUPPORT_PLATFORM_5.x}
+        width={SUPPORT_PLATFORM_5.width}
+        height={SUPPORT_PLATFORM_5.height}
+        img={'./assets/platforms/platform5.png'}
+      />
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_6.y}
+        left={SUPPORT_PLATFORM_4.x}
+        width={SUPPORT_PLATFORM_4.width}
+        height={SUPPORT_PLATFORM_4.height}
+        img={'./assets/platforms/platform5.png'}
+      />
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_7.y}
+        left={SUPPORT_PLATFORM_7.x}
+        width={SUPPORT_PLATFORM_7.width}
+        height={SUPPORT_PLATFORM_7.height}
+        img={'./assets/platforms/platform5.png'}
       />
     </> 
   );

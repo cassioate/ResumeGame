@@ -5,20 +5,22 @@ interface PropsPlatform {
   bottom: number;
   width: number;
   height: number;
+  hitBoxWidth?: number;
+  hitBoxHeight?: number;
   left: number;
   img: string;
   rotate?: number;
   zIndex?: number;
 }
 
-export const Platform = ({bottom, width, height, left, img, rotate, zIndex}: PropsPlatform) => {
+export const Platform = ({bottom, width, height, hitBoxWidth = width, hitBoxHeight = height, left, img, rotate, zIndex}: PropsPlatform) => {
 
   return (
     <HitBoxPlatform
       id='HitBoxPlatform'
       bottom={bottom}
-      width={width}
-      height={height}
+      width={hitBoxWidth}
+      height={hitBoxHeight}
       left={left}
     >
       <PlatformImgStyled

@@ -58,7 +58,6 @@ export const Spikes = () => {
           touchSpikeValidator.push(spike)
       }
     })
-    console.log(touchSpikeValidator.length)
     if (touchSpikeValidator.length > 0) {
       setEND_GAME(true)
     }
