@@ -8,9 +8,10 @@ interface PropsPlatform {
   left: number;
   img: string;
   rotate?: number;
+  zIndex?: number;
 }
 
-export const Platform = ({bottom, width, height, left, img, rotate}: PropsPlatform) => {
+export const Platform = ({bottom, width, height, left, img, rotate, zIndex}: PropsPlatform) => {
 
   return (
     <HitBoxPlatform
@@ -21,6 +22,7 @@ export const Platform = ({bottom, width, height, left, img, rotate}: PropsPlatfo
       left={left}
     >
       <PlatformImgStyled
+        zIndex={zIndex}
         rotate={rotate}
         id='PlatformImg'
         width={width+10}

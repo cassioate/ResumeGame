@@ -2,10 +2,10 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { GameContext } from "../../../context/ResumeGameContext/gameContext";
 import { HeroMoveContext } from "../../../context/ResumeGameContext/heroPropsContext";
-import { HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
+import { HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
 import { Platform } from "../../atoms/platform";
 
-interface Platform {
+interface PlatformI {
   x: number,
   y: number,
   width: number,
@@ -17,25 +17,13 @@ export const Platforms = () => {
   const { POSITION_Y, POSITION_X, IN_PLATFORM, FLOOR, setIN_PLATFORM, setFLOOR, setMAX_JUMP} = useContext(HeroMoveContext)
   const { setEND_GAME } = useContext(GameContext)
 
-  const FIRST_PLATFORM_X_Y: Platform = {x: 0, y:0, width: 150, height: 30}
-  const SECOND_PLATFORM_X_Y: Platform  = {x: 200, y:0, width: 150, height: 30}
-  const THIRD_PLATFORM_Y_X: Platform  = {x: 400, y:0, width: 150, height: 30}
-  const FOURTH_PLATFORM_Y_X: Platform  = {x: 600, y:0, width: 150, height: 30}
-  const FIFTH_PLATFORM_Y_X: Platform  = {x: 500, y:40, width: 150, height: 30}
-
-  // DEATHS
-  const DEATH_SPIKE_1: Platform  = {x: 10, y:30, width: 80, height: 30}
-  // const WALL_RIGHT: Platform  = {x: 790, y:-80, width: 50, height: 600}
-  // const WALL_TOP: Platform  = {x: 0, y:480, width: 500, height: 50}
-  // const WALL_TOP_2: Platform  = {x: 400, y:480, width: 500, height: 50}
+  const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:0, width: 150, height: 30}
+  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:0, width: 150, height: 30}
+  const THIRD_PLATFORM_Y_X: PlatformI  = {x: 400, y:0, width: 150, height: 30}
+  const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 600, y:0, width: 150, height: 30}
+  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 500, y:80, width: 150, height: 30}
   
-  // DECORATIVOS
-  const WALL_LEFT: Platform  = {x: -45, y:-80, width: 50, height: 600}
-  const WALL_RIGHT: Platform  = {x: 790, y:-80, width: 50, height: 600}
-  const WALL_TOP: Platform  = {x: 0, y:480, width: 500, height: 50}
-  const WALL_TOP_2: Platform  = {x: 400, y:480, width: 500, height: 50}
-
-  const platforms: Platform[] = [
+  const platforms: PlatformI[] = [
     FIRST_PLATFORM_X_Y,
     SECOND_PLATFORM_X_Y,
     THIRD_PLATFORM_Y_X,
@@ -43,13 +31,13 @@ export const Platforms = () => {
     FIFTH_PLATFORM_Y_X,
   ]
   
-  const validatorPlatform: Platform[] = []
+  const validatorPlatform: PlatformI[] = []
   useEffect(() => {
     platforms.forEach((platform) => {
       if (
         POSITION_X + HERO_SIZE_WIDTH_HIT_BOX >= platform.x && 
         POSITION_X <= platform.x + platform.width &&
-        POSITION_Y >= platform.y + platform.height 
+        POSITION_Y >= platform.y + platform.height
         ) {
           setFLOOR(platform.y + platform.height)
           if (POSITION_Y === FLOOR) {
@@ -77,6 +65,7 @@ export const Platforms = () => {
   return (
     <>
       <Platform
+        zIndex={2}
         bottom={FIRST_PLATFORM_X_Y.y}
         left={FIRST_PLATFORM_X_Y.x}
         width={FIRST_PLATFORM_X_Y.width}
@@ -84,6 +73,7 @@ export const Platforms = () => {
         img={'./assets/platforms/platform1.png'}
       />
       <Platform
+        zIndex={2}
         bottom={SECOND_PLATFORM_X_Y.y}
         left={SECOND_PLATFORM_X_Y.x}
         width={SECOND_PLATFORM_X_Y.width}
@@ -91,6 +81,7 @@ export const Platforms = () => {
         img={'./assets/platforms/platform1.png'}
       />
       <Platform
+        zIndex={2}
         bottom={THIRD_PLATFORM_Y_X.y}
         left={THIRD_PLATFORM_Y_X.x}
         width={THIRD_PLATFORM_Y_X.width}
@@ -98,6 +89,7 @@ export const Platforms = () => {
         img={'./assets/platforms/platform1.png'}
       />
       <Platform
+        zIndex={2}
         bottom={FOURTH_PLATFORM_Y_X.y}
         left={FOURTH_PLATFORM_Y_X.x}
         width={FOURTH_PLATFORM_Y_X.width}
@@ -105,61 +97,14 @@ export const Platforms = () => {
         img={'./assets/platforms/platform1.png'}
       />
       <Platform
+        zIndex={2}
         bottom={FIFTH_PLATFORM_Y_X.y}
         left={FIFTH_PLATFORM_Y_X.x}
         width={FIFTH_PLATFORM_Y_X.width}
         height={FIFTH_PLATFORM_Y_X.height}
         img={'./assets/platforms/platform1.png'}
       />
-
-
-
-
-      {/* DEATH */}
-      <Platform
-        bottom={DEATH_SPIKE_1.y}
-        left={DEATH_SPIKE_1.x}
-        width={DEATH_SPIKE_1.width}
-        height={DEATH_SPIKE_1.height}
-        img={'./assets/platforms/spike1.png'}
-      />
-      {/* DEATH */}
-
-
-
-      {/* DECORATIVOS */}
-      <Platform
-        bottom={WALL_LEFT.y}
-        left={WALL_LEFT.x}
-        width={WALL_LEFT.width}
-        height={WALL_LEFT.height}
-        img={'./assets/platforms/wall1.png'}
-      />
-      <Platform
-        bottom={WALL_RIGHT.y}
-        left={WALL_RIGHT.x}
-        width={WALL_RIGHT.width}
-        height={WALL_RIGHT.height}
-        img={'./assets/platforms/wall1.png'}
-      />
-      <Platform
-        rotate={180}
-        bottom={WALL_TOP.y}
-        left={WALL_TOP.x}
-        width={WALL_TOP.width}
-        height={WALL_TOP.height}
-        img={'./assets/platforms/platform3.png'}
-      />
-      <Platform
-        rotate={180}
-        bottom={WALL_TOP_2.y}
-        left={WALL_TOP_2.x}
-        width={WALL_TOP_2.width}
-        height={WALL_TOP_2.height}
-        img={'./assets/platforms/platform3.png'}
-      />
-      {/* DECORATIVOS */}
-    </>
+    </> 
   );
 }
 

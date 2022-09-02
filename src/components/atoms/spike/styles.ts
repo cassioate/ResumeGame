@@ -7,7 +7,12 @@ interface PropsHitBox {
   height: number;
 }
 
-export const HitBoxPlatform = styled.div.attrs<PropsHitBox>((props) => ({
+interface IMG {
+  rotate?: number
+  zIndex?: number;
+}
+
+export const HitBoxStyled = styled.div.attrs<PropsHitBox>((props) => ({
   style: {
     width: props.width,
     height: props.height,
@@ -25,14 +30,9 @@ export const HitBoxPlatform = styled.div.attrs<PropsHitBox>((props) => ({
   align-items: center;
 `
 
-interface IMG {
-  rotate?: number
-  zIndex?: number;
-}
-
-export const PlatformImgStyled = styled.img<IMG>`
+export const SpikeImgStyled = styled.img<IMG>`
   src: ${props => props.src};
   position: absolute;
-  transform: ${props => props.rotate && 'rotate('+props.rotate+'deg)'};
+  transform: ${props => props.rotate ? 'rotate('+props.rotate+'deg)' : undefined};
   z-index: ${props => props.zIndex};
 `

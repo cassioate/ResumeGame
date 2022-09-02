@@ -7,6 +7,10 @@ import { Arrows } from '../keyboard/arrows';
 import { Platforms } from '../platforms';
 import { StartGame } from '../../molecules/startGame';
 import { Container } from './styles';
+import { Walls } from '../walls';
+import { Spikes } from '../spikes';
+import { Decoration } from '../../atoms/decoration';
+import { Decorations } from '../decorations';
 
 export const Game = () => {
   const { END_GAME } = useContext(GameContext)
@@ -21,6 +25,9 @@ export const Game = () => {
         <BackGround/>
         <Hero/>
         <Platforms/>
+        <Spikes/>
+        <Decorations/>
+        <Walls/>
       </GameBox> 
       <Arrows/>
     </Container>

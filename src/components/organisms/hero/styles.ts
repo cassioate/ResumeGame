@@ -30,5 +30,6 @@ export const HeroHitBox = styled.div.attrs<PropsHero>((props) => ({
   align-content: center;
   justify-items: center;
   align-items: center;
+  z-index: 3;
 `
 

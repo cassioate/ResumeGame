@@ -42,10 +42,10 @@ export const Arrows = () => {
 
   // Make the move of Jumping
   useEffect(() => {
-      if (POSITION_Y === FLOOR && (isArrowUpPress  || isArrowSpacePress)){
-        setPOSITION_Y(POSITION_Y+1)
-      } 
-    }, [POSITION_Y, isArrowUpPress, isArrowSpacePress])
+    if (POSITION_Y === FLOOR && (isArrowUpPress  || isArrowSpacePress)){
+      setPOSITION_Y(POSITION_Y+1)
+    } 
+  }, [POSITION_Y, isArrowUpPress, isArrowSpacePress])
   
   // Make a Looping to use the velocity to move the Hero
   useEffect(() => {
