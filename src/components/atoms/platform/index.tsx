@@ -16,22 +16,26 @@ interface PropsPlatform {
 export const Platform = ({bottom, width, height, hitBoxWidth = width, hitBoxHeight = height, left, img, rotate, zIndex}: PropsPlatform) => {
 
   return (
-    <HitBoxPlatform
-      id='HitBoxPlatform'
-      bottom={bottom}
-      width={hitBoxWidth}
-      height={hitBoxHeight}
-      left={left}
-    >
-      <PlatformImgStyled
-        zIndex={zIndex}
-        rotate={rotate}
-        id='PlatformImg'
-        width={width+10}
-        height={height+5}
-        src={img}
-      /> 
-    </HitBoxPlatform>
+    <>
+      <HitBoxPlatform
+        id='HitBoxPlatform'
+        bottom={bottom}
+        width={hitBoxWidth}
+        height={0}
+        left={left}
+      >
+        <PlatformImgStyled
+          id='PlatformImg'
+          zIndex={zIndex}
+          rotate={rotate}
+          width={width}
+          height={height}
+          // src={img}
+        /> 
+      </HitBoxPlatform>
+
+    </>
+
   );
 }
 

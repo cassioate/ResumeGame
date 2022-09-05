@@ -4,12 +4,12 @@ interface IProps {
   children: ReactElement;
 }
 
-interface IHeroMoveContext {
+interface IGravityContext {
   END_GAME: boolean;
   setEND_GAME: (value: boolean) => void;
 }
 
-export const GameContext = React.createContext({} as IHeroMoveContext);
+export const GameContext = React.createContext({} as IGravityContext);
 
 export const GameContextProvider: FunctionComponent<IProps> = ({children}) => {
   const [END_GAME, setEND_GAME] = useState(false)

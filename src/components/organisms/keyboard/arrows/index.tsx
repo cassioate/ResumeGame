@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { SpaceKeyboard } from '../../../atoms/buttons/arrowButtons/aKeyboardSpace';
 import { ArrowDown } from '../../../atoms/buttons/arrowButtons/arrowDown';
 import { ArrowLeft } from '../../../atoms/buttons/arrowButtons/arrowLeft';
@@ -8,56 +8,69 @@ import { ArrowUp } from '../../../atoms/buttons/arrowButtons/arrowUp';
 import useEventListener from '@use-it/event-listener';
 
 import { Container, ContainerArrow } from './styles';
-import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL } from '../../../../settings/constants';
+import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL, JUMP_VELOCITY, GRAVITY } from '../../../../settings/constants';
 import { GameContext } from '../../../../context/ResumeGameContext/gameContext';
-import { HeroMoveContext } from '../../../../context/ResumeGameContext/heroPropsContext';
+import { GravityContext } from '../../../../context/ResumeGameContext/gravityContext';
 import { KeyboardContext } from '../../../../context/ResumeGameContext/keyboardContext';
 
 export const Arrows = () => {
-  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, 
-    VELOCITY_OF_MOVE, setVELOCITY_OF_MOVE, setHERO_SIZE, FLOOR } = useContext(HeroMoveContext)
+  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on,
+    velocity_x, velocity_y, maxJump, setHERO_SIZE, floor } = useContext(GravityContext)
   const { END_GAME } = useContext(GameContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
   const intervalLeft = useRef<any>()
+  const intervalJump = useRef<any>()
 
-  // Make move for the Right or the Left inside the GameBox and when press ArrowDown the hero get a smaller size
+  /* MOVE RIGHT OR LEFT */
+  // START the move for the Right or the Left inside the GameBox
   useEffect(() => {
     if (POSITION_X <= GAME_BOX_RANGE_INITIAL){
       setPOSITION_X(1)
     } else if (POSITION_X >= GAME_BOX_RANGE_FINAL){
       setPOSITION_X(GAME_BOX_RANGE_FINAL)
     }
-    if (VELOCITY_OF_MOVE === 0){
+    if (velocity_x.current === 0){
       if (isArrowRightPress){
-        setVELOCITY_OF_MOVE(MOVE_RIGHT)
-        setPOSITION_X(POSITION_X+MOVE_RIGHT)
+        velocity_x.current = MOVE_RIGHT
+        setPOSITION_X(POSITION_X+velocity_x.current)
       } 
       if (isArrowLeftPress){
-        setVELOCITY_OF_MOVE(-MOVE_LEFT)
-        setPOSITION_X(POSITION_X-MOVE_LEFT)
+        velocity_x.current = -MOVE_LEFT
+        setPOSITION_X(POSITION_X-velocity_x.current)
       }
     }
-  }, [POSITION_X, VELOCITY_OF_MOVE, isArrowLeftPress, isArrowRightPress, isArrowDownPress])
+  }, [POSITION_X, isArrowLeftPress, isArrowRightPress, isArrowDownPress])
 
-  // Make the move of Jumping
-  useEffect(() => {
-    if (POSITION_Y === FLOOR && (isArrowUpPress  || isArrowSpacePress)){
-      setPOSITION_Y(POSITION_Y+1)
-    } 
-  }, [POSITION_Y, isArrowUpPress, isArrowSpacePress])
-  
-  // Make a Looping to use the velocity to move the Hero
+  // Make a Looping to move for the Right or the Left inside the GameBox
   useEffect(() => {
     intervalLeft.current = setInterval(() => {   
-      if (POSITION_X >= GAME_BOX_RANGE_INITIAL && POSITION_X <= GAME_BOX_RANGE_FINAL) {
-        setPOSITION_X(POSITION_X+VELOCITY_OF_MOVE)
-      }
+        setPOSITION_X(POSITION_X+velocity_x.current)
     }, 20)
     return () => {
       clearInterval(intervalLeft.current)
     }
-  }, [POSITION_X, VELOCITY_OF_MOVE])
+  }, [POSITION_X])
+  /* MOVE RIGHT OR LEFT */
+
+  // Make a Looping to JUMP inside the GameBox
+  useEffect(() => {
+    console.log("TESTE - 1")
+    if (POSITION_Y >= maxJump.current){
+      console.log("TESTE - 2")
+      clearInterval(intervalJump.current)
+      gravity_on.current = true
+    } else if (POSITION_Y > floor.current) {
+      console.log("TESTE - 3")
+      intervalJump.current = setInterval(() => {   
+        setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
+      }, 20)
+      return () => {
+        clearInterval(intervalJump.current)
+      }
+    }
+  }, [POSITION_Y])
+  /* JUMPING */
 
   useEventListener('keydown', ({key}: any) => {
     if (!END_GAME) {
@@ -69,14 +82,17 @@ export const Arrows = () => {
           setIsArrowRightPress(true)
           break
         case 'ArrowDown':
-          // setHERO_HEIGHT(HERO_SIZE_HEIGHT*0.75)
           setHERO_SIZE(HERO_SIZE_HEIGHT_IMG*0.75)
           setIsArrowDownPress(true)
           break
         case 'ArrowUp':
+          // velocity_y.current = JUMP_VELOCITY
+          setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
           setIsArrowUpPress(true)
           break
         case ' ':
+          // velocity_y.current = JUMP_VELOCITY
+          setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
           setIsArrowSpacePress(true)
           break
       }
@@ -88,14 +104,12 @@ export const Arrows = () => {
       switch (key) {
         case 'ArrowLeft':
           clearInterval(intervalLeft.current)
-          setVELOCITY_OF_MOVE(0)
-          // setHERO_WIDTH(HERO_SIZE_WIDTH)
+          velocity_x.current = 0
           setIsArrowLeftPress(false)
           break
         case 'ArrowRight':
           clearInterval(intervalLeft.current)
-          setVELOCITY_OF_MOVE(0)
-          // setHERO_WIDTH(HERO_SIZE_WIDTH)
+          velocity_x.current = 0
           setIsArrowRightPress(false)
           break
         case 'ArrowDown':

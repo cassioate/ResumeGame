@@ -20,17 +20,17 @@ export const HitBoxPlatform = styled.div.attrs<PropsHitBox>((props) => ({
   border-style: solid;
   display: flex;
   justify-content: center;
-  align-content: center;
-  justify-items: center;
   align-items: center;
 `
 
 interface IMG {
   rotate?: number
   zIndex?: number;
+  bottom?: number
 }
 
 export const PlatformImgStyled = styled.img<IMG>`
+  top: 0px;
   src: ${props => props.src};
   position: absolute;
   transform: ${props => props.rotate && 'rotate('+props.rotate+'deg)'};

@@ -6,7 +6,7 @@ interface IProps {
   children: ReactElement;
 }
 
-interface IHeroMoveContext {
+interface IGravityContext {
   isArrowRightPress: boolean;
   isArrowLeftPress: boolean;
   isArrowUpPress: boolean;
@@ -19,7 +19,7 @@ interface IHeroMoveContext {
   setIsArrowSpacePress: (value: boolean) => void;
 }
 
-export const KeyboardContext = React.createContext({} as IHeroMoveContext);
+export const KeyboardContext = React.createContext({} as IGravityContext);
 
 export const KeyboardContextProvider: FunctionComponent<IProps> = ({children}) => {
   const [isArrowRightPress, setIsArrowRightPress] = useState(false)

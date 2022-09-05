@@ -16,11 +16,13 @@ export const POSITION_Y_TO_DIE = -50
 // GRAVITY
 export const GRAVITY_DOWN = 0.97
 export const GRAVITY_UP = 0.97
+export const GRAVITY = 0.5
 
 // MOVEMENTS
 export const START_MAX_JUMP = 80
 export const MOVE_LEFT = 2
 export const MOVE_RIGHT = 2
+export const JUMP_VELOCITY = 2
 
 //IMAGES
 export const HERO_IMG_STOPPED = './assets/hero/stoppedAnimation/Chara - BlueIdle000'

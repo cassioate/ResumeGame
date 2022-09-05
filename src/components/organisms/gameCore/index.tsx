@@ -25,9 +25,9 @@ export const Game = () => {
         <BackGround/>
         <Hero/>
         <Platforms/>
-        <Spikes/>
+        {/* <Spikes/>
         <Decorations/>
-        <Walls/>
+        <Walls/> */}
       </GameBox> 
       <Arrows/>
     </Container>

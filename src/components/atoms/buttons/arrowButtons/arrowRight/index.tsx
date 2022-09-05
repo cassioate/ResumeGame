@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import{ButtonIconArrowRight} from './styles';
 import { FiArrowRight } from "react-icons/fi"
 import useEventListener from '@use-it/event-listener';
-import { HeroMoveContext } from '../../../../../context/ResumeGameContext/heroPropsContext';
+import { GravityContext } from '../../../../../context/ResumeGameContext/gravityContext';
 import { KeyboardContext } from '../../../../../context/ResumeGameContext/keyboardContext';
 
 export const ArrowRight = () => {
   const { setIsArrowRightPress } = useContext(KeyboardContext)
-  const { setVELOCITY_OF_MOVE } = useContext(HeroMoveContext)
 
   useEventListener('mousedown', (event: any) => {
     event.path.forEach((e: any) => {
@@ -18,7 +17,6 @@ export const ArrowRight = () => {
   })
 
   useEventListener('mouseup', () => {
-    setVELOCITY_OF_MOVE(0)
     setIsArrowRightPress(false)
   })
   

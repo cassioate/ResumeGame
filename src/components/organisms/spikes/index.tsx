@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { GameContext } from "../../../context/ResumeGameContext/gameContext";
-import { HeroMoveContext } from "../../../context/ResumeGameContext/heroPropsContext";
-import { HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_WIDTH_HIT_BOX, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
+import { GravityContext } from "../../../context/ResumeGameContext/gravityContext";
+import { HERO_SIZE_WIDTH_HIT_BOX } from "../../../settings/constants";
 import { Spike } from "../../atoms/spike";
 
 interface SpikesI {
@@ -13,7 +13,7 @@ interface SpikesI {
 }
 
 export const Spikes = () => {
-  const { POSITION_Y, POSITION_X, IN_PLATFORM, FLOOR, setIN_PLATFORM, setFLOOR, setMAX_JUMP} = useContext(HeroMoveContext)
+  const { POSITION_Y, POSITION_X} = useContext(GravityContext)
   const { setEND_GAME } = useContext(GameContext)
 
   const SPIKE_ONE: SpikesI  = {x: 550, y:10, width: 150, height: 40}

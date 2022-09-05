@@ -2,20 +2,20 @@ import { useContext, useEffect, useState } from 'react';
 import React from 'react';
 import {HeroStyled, HeroHitBox} from './styles';
 import { HERO_IMG_JUMP, HERO_IMG_STOPPED, HERO_IMG_WALK, HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_IMG } from '../../../settings/constants';
-import { HeroMoveContext } from '../../../context/ResumeGameContext/heroPropsContext';
+import { GravityContext } from '../../../context/ResumeGameContext/gravityContext';
 import { KeyboardContext } from '../../../context/ResumeGameContext/keyboardContext';
 
 export const Hero = () => {
   const [HERO_IMG, setHERO_IMG] = useState(0);
-  const {POSITION_Y, POSITION_X, HERO_SIZE, FLOOR, HIT_BOX_HERO_HEIGHT, HIT_BOX_HERO_WIDTH} = useContext(HeroMoveContext);
+  const { POSITION_Y, POSITION_X, HERO_SIZE, floor, HIT_BOX_HERO_HEIGHT, HIT_BOX_HERO_WIDTH} = useContext(GravityContext);
   const [HERO_IMG_SRC_ACTIVED, setHERO_IMG_SRC_ACTIVED] = useState(HERO_IMG_STOPPED)
   const {isArrowRightPress, isArrowLeftPress, isArrowSpacePress, isArrowUpPress} = useContext(KeyboardContext)
   const [HERO_DIRECTION, setHERO_DIRECTION] = useState('RIGHT')
 
   useEffect(() => {
-      setTimeout(() => {
-        HERO_IMG >= 19? setHERO_IMG(0) : setHERO_IMG(HERO_IMG + 1)
-      }, 100)
+    setTimeout(() => {
+      HERO_IMG >= 19? setHERO_IMG(0) : setHERO_IMG(HERO_IMG + 1)
+    }, 100)
   }, [HERO_IMG])
 
   useEffect(() => {
@@ -27,10 +27,10 @@ export const Hero = () => {
       setHERO_IMG_SRC_ACTIVED(HERO_IMG_WALK)
     } else if (isArrowUpPress){
       setHERO_IMG_SRC_ACTIVED(HERO_IMG_JUMP)
-    } else if (FLOOR === POSITION_Y) {
+    } else if (floor.current === POSITION_Y) {
       setHERO_IMG_SRC_ACTIVED(HERO_IMG_STOPPED)
     }
-  }, [POSITION_Y, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress])
+  }, [POSITION_Y, floor, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress])
 
   return (
     <HeroHitBox
