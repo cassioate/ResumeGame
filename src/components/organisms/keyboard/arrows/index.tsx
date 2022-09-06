@@ -8,19 +8,18 @@ import { ArrowUp } from '../../../atoms/buttons/arrowButtons/arrowUp';
 import useEventListener from '@use-it/event-listener';
 
 import { Container, ContainerArrow } from './styles';
-import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL, JUMP_VELOCITY, GRAVITY } from '../../../../settings/constants';
+import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL, JUMP_VELOCITY } from '../../../../settings/constants';
 import { GameContext } from '../../../../context/ResumeGameContext/gameContext';
 import { GravityContext } from '../../../../context/ResumeGameContext/gravityContext';
 import { KeyboardContext } from '../../../../context/ResumeGameContext/keyboardContext';
 
 export const Arrows = () => {
-  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on,
-    velocity_x, velocity_y, maxJump, setHERO_SIZE, floor } = useContext(GravityContext)
+  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on, intervalJump,
+    velocity_x, velocity_y, setHERO_SIZE } = useContext(GravityContext)
   const { END_GAME } = useContext(GameContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
   const intervalLeft = useRef<any>()
-  const intervalJump = useRef<any>()
 
   /* MOVE RIGHT OR LEFT */
   // START the move for the Right or the Left inside the GameBox
@@ -56,12 +55,9 @@ export const Arrows = () => {
   /* JUMPING */
   // Start the jump
   useEffect(() => {
-    console.log(velocity_y.current)
-    if (velocity_y.current === 0){
-      if (isArrowSpacePress || isArrowUpPress){
-        velocity_y.current = JUMP_VELOCITY
-        setPOSITION_Y(POSITION_Y+velocity_y.current)
-      } 
+    if (velocity_y.current === 0 && (isArrowSpacePress || isArrowUpPress)){
+      velocity_y.current = JUMP_VELOCITY
+      setPOSITION_Y(POSITION_Y+velocity_y.current)
     }
   }, [POSITION_Y])
 
@@ -96,7 +92,6 @@ export const Arrows = () => {
           setIsArrowDownPress(true)
           break
         case 'ArrowUp':
-          // velocity_y.current = JUMP_VELOCITY
           if (!isArrowUpPress && !isArrowSpacePress){
             setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
             setIsArrowUpPress(true)

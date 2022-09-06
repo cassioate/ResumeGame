@@ -2,7 +2,7 @@
 import React, { FunctionComponent, ReactElement, useEffect, useRef, useState } from "react";
 import { useContext } from "react";
 import { START_MAX_JUMP, START_POSITION, HERO_SIZE_WIDTH_HIT_BOX,
-  HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_HEIGHT_IMG, START_FLOOR, GRAVITY_UP, GRAVITY, POSITION_Y_TO_DIE, JUMP_VELOCITY } from "../../settings/constants";
+  HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_HEIGHT_IMG, START_FLOOR, JUMP_VELOCITY } from "../../settings/constants";
 import { GameContext } from "./gameContext";
 
 interface IProps {
@@ -25,6 +25,8 @@ interface IGravityContext {
   position_x: any;
   position_y: any;
   gravity_on: any;
+  intervalJump: any;
+  validJump: any;
   setPOSITION_Y: (position: number) => void;
   setPOSITION_X: (position: number) => void;
   setVELOCITY_OF_MOVE_X: (velocity: number) => void;
@@ -53,18 +55,22 @@ export const GravityContextProvider: FunctionComponent<IProps> = ({children}) =>
   const inPlatform = useRef(true)
   const velocity_y = useRef(0)
   const velocity_x = useRef(0)
-  const gravity_on = useRef(false)
+  const gravity_on = useRef(true)
+  const intervalJump = useRef<any>()
   const intervalGravity = useRef<NodeJS.Timer>()
+  const validJump = useRef<any>()
 
   // GRAVITY
   useEffect(() => {
       if (POSITION_Y >= maxJump.current){
         gravity_on.current = true
       } else if (POSITION_Y <= floor.current){
+        clearInterval(intervalJump.current)
         clearInterval(intervalGravity.current)
         gravity_on.current = false
       }
       if (gravity_on.current || !inPlatform.current) {
+      gravity_on.current = true
       intervalGravity.current = setInterval(() => {
         setPOSITION_Y(POSITION_Y - JUMP_VELOCITY);
       }, 20)
@@ -72,21 +78,19 @@ export const GravityContextProvider: FunctionComponent<IProps> = ({children}) =>
         clearInterval(intervalGravity.current)
       }
     } 
-  }, [POSITION_Y])
+  }, [POSITION_Y, POSITION_X])
 
   // RESET THE GAME
   useEffect(() => {
     if (END_GAME){
       setPOSITION_X(START_POSITION)
       setPOSITION_Y(START_FLOOR)
-      inPlatform.current = false
-      velocity_y.current = 0
       velocity_x.current = 0
     }
   }, [END_GAME])
 
   return (
-    <GravityContext.Provider value={{ position_x, position_y, gravity_on,
+    <GravityContext.Provider value={{ position_x, position_y, gravity_on, intervalJump, validJump,
       POSITION_Y, POSITION_X, VELOCITY_OF_MOVE_X, VELOCITY_OF_MOVE_Y, HIT_BOX_HERO_WIDTH, maxJump, velocity_x, velocity_y,
       HIT_BOX_HERO_HEIGHT, HERO_SIZE, floor, inPlatform,
       setPOSITION_Y, setPOSITION_X, setVELOCITY_OF_MOVE_X, setVELOCITY_OF_MOVE_Y,

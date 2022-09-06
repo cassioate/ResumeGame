@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import { GameContext } from "../../../context/ResumeGameContext/gameContext";
 import { GravityContext } from "../../../context/ResumeGameContext/gravityContext";
-import { HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
+import { HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
 import { Platform } from "../../atoms/platform";
 
 interface PlatformI {
@@ -22,7 +22,7 @@ export const Platforms = () => {
   const THIRD_PLATFORM_Y_X: PlatformI  = {x: 200, y:30, width: 350, height: 30}
   
   const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 700, y:300, width: 100, height: 300}
-  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 550, y:10, width: 350, height: 30}
+  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 550, y:30, width: 350, height: 30}
 
   const SUPPORT_PLATFORM_1: PlatformI  = {x: 250, y:90, width: 30, height: 25}
   const SUPPORT_PLATFORM_2: PlatformI  = {x: 300, y:100, width: 30, height: 25}
@@ -47,33 +47,32 @@ export const Platforms = () => {
     SUPPORT_PLATFORM_7
   ]
   
-  let tempInPlatform = false
+  const tempInPlatform: PlatformI[] = []
   useEffect(() => {
     platforms.forEach((platform) => {
       if (
-        POSITION_X + HERO_SIZE_WIDTH_HIT_BOX >= platform.x && 
-        POSITION_X <= platform.x + platform.width &&
-        POSITION_Y >= platform.y &&
-        POSITION_Y <= platform.y
+        (POSITION_X + HERO_SIZE_WIDTH_HIT_BOX >= platform.x && 
+          POSITION_X <= platform.x + platform.width &&
+          POSITION_Y >= platform.y && POSITION_Y <= platform.y + START_MAX_JUMP) 
+          && platform.y >= POSITION_Y - 5 && platform.y <= POSITION_Y + 5
         ) {
-          tempInPlatform = true
-          floor.current = platform.y
-          if (POSITION_Y <= floor.current) {
-            maxJump.current = platform.y + START_MAX_JUMP
+          tempInPlatform.push(platform)
+
+          if (gravity_on.current) {
+            floor.current = platform.y
+            maxJump.current = floor.current + START_MAX_JUMP
+          } else if (POSITION_Y + 5 >= START_FLOOR && POSITION_Y - 5 <= START_FLOOR) {
+            floor.current = START_FLOOR
+            maxJump.current = floor.current + START_MAX_JUMP
           }
       }
     })
 
-    // if (!inside) {
-    //   if (POSITION_Y === floor.current) {
-    //     inPlatform.current = false
-    //     // floor.current = START_FLOOR
-    //   }
-    // }
-    // if (POSITION_Y === floor.current) {
-    //   maxJump.current = floor.current + START_MAX_JUMP
-    // }
-    // inPlatform.current = tempInPlatform
+    if (tempInPlatform.length > 0){
+      inPlatform.current = true
+    } else if (tempInPlatform.length === 0 && (POSITION_Y >= maxJump.current || POSITION_Y <= floor.current)){
+      inPlatform.current = false
+    } 
   }, [POSITION_X, POSITION_Y])
 
   useEffect(() => {
