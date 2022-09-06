@@ -136,13 +136,13 @@ export const Arrows = () => {
 
   return (
     <Container>
-      <ContainerArrow>
+      {/* <ContainerArrow>
         <ArrowUp></ArrowUp>
         <ArrowDown></ArrowDown>
         <ArrowLeft></ArrowLeft>
         <ArrowRight></ArrowRight>
       </ContainerArrow>
-      <SpaceKeyboard/>
+      <SpaceKeyboard/> */}
     </Container>
   );
 }

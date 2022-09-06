@@ -66,7 +66,7 @@ export const Spikes = () => {
   return (
     <>
       <Spike
-        zIndex={1}
+        zIndex={2}
         bottom={SPIKE_ONE.y}
         left={SPIKE_ONE.x}
         width={SPIKE_ONE.width}
@@ -74,7 +74,7 @@ export const Spikes = () => {
         img={'./assets/spikes/spike1.png'}
       />
       <Spike
-        zIndex={1}
+        zIndex={2}
         bottom={SPIKE_TWO.y}
         left={SPIKE_TWO.x}
         width={SPIKE_TWO.width}
@@ -148,7 +148,7 @@ export const Spikes = () => {
         img={'./assets/spikes/spike1.png'}
       />
       <Spike
-        zIndex={1}
+        zIndex={2}
         bottom={SPIKE_FIVE_2.y}
         left={SPIKE_FIVE_2.x}
         width={SPIKE_FIVE_2.width}
@@ -156,7 +156,7 @@ export const Spikes = () => {
         img={'./assets/spikes/spike2.png'}
       />
       <Spike
-        zIndex={1}
+        zIndex={2}
         bottom={SPIKE_SIX_2.y}
         left={SPIKE_SIX_2.x}
         width={SPIKE_SIX_2.width}

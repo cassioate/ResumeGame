@@ -30,7 +30,7 @@ export const Platform = ({bottom, width, height, hitBoxWidth = width, hitBoxHeig
           rotate={rotate}
           width={width}
           height={height}
-          // src={img}
+          src={img}
         /> 
       </HitBoxPlatform>
 

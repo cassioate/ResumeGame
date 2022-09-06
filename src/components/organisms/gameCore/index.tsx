@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { GameContext, GameContextProvider } from '../../../context/ResumeGameContext/gameContext';
+import { GameContext } from '../../../context/ResumeGameContext/gameContext';
 import { BackGround } from '../../atoms/background';
 import { GameBox } from '../../atoms/gameBox';
 import { Hero } from '../hero';
@@ -9,7 +9,6 @@ import { StartGame } from '../../molecules/startGame';
 import { Container } from './styles';
 import { Walls } from '../walls';
 import { Spikes } from '../spikes';
-import { Decoration } from '../../atoms/decoration';
 import { Decorations } from '../decorations';
 
 export const Game = () => {
@@ -25,9 +24,9 @@ export const Game = () => {
         <BackGround/>
         <Hero/>
         <Platforms/>
-        {/* <Spikes/>
+        <Spikes/>
         <Decorations/>
-        <Walls/> */}
+        <Walls/>
       </GameBox> 
       <Arrows/>
     </Container>
