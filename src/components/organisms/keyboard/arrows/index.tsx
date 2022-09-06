@@ -56,6 +56,7 @@ export const Arrows = () => {
   /* JUMPING */
   // Start the jump
   useEffect(() => {
+    console.log(velocity_y.current)
     if (velocity_y.current === 0){
       if (isArrowSpacePress || isArrowUpPress){
         velocity_y.current = JUMP_VELOCITY
@@ -81,10 +82,14 @@ export const Arrows = () => {
     if (!END_GAME) {
       switch (key) {
         case 'ArrowLeft':
-          setIsArrowLeftPress(true)
+          if (!isArrowRightPress){
+            setIsArrowLeftPress(true)
+          }
           break
         case 'ArrowRight':
-          setIsArrowRightPress(true)
+          if (!isArrowRightPress){
+            setIsArrowRightPress(true)
+          }
           break
         case 'ArrowDown':
           setHERO_SIZE(HERO_SIZE_HEIGHT_IMG*0.75)
@@ -92,13 +97,16 @@ export const Arrows = () => {
           break
         case 'ArrowUp':
           // velocity_y.current = JUMP_VELOCITY
-          setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
-          setIsArrowUpPress(true)
+          if (!isArrowUpPress && !isArrowSpacePress){
+            setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
+            setIsArrowUpPress(true)
+          }
           break
         case ' ':
-          // velocity_y.current = JUMP_VELOCITY
-          setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
-          setIsArrowSpacePress(true)
+          if (!isArrowUpPress && !isArrowSpacePress){
+            setPOSITION_Y(POSITION_Y+JUMP_VELOCITY)
+            setIsArrowSpacePress(true)
+          }
           break
       }
     }
