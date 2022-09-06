@@ -40,7 +40,7 @@ export const GravityContextProvider: FunctionComponent<IProps> = ({children}) =>
   const [POSITION_Y, setPOSITION_Y] = useState(START_FLOOR);
   const [POSITION_X, setPOSITION_X] = useState(START_POSITION);
   const [VELOCITY_OF_MOVE_X, setVELOCITY_OF_MOVE_X] = useState(0);
-  const [VELOCITY_OF_MOVE_Y, setVELOCITY_OF_MOVE_Y] = useState(2);
+  const [VELOCITY_OF_MOVE_Y, setVELOCITY_OF_MOVE_Y] = useState(0);
   const [HIT_BOX_HERO_WIDTH, setHIT_BOX_HERO_WIDTH] = useState(HERO_SIZE_WIDTH_HIT_BOX)
   const [HIT_BOX_HERO_HEIGHT, setHIT_BOX_HERO_HEIGHT] = useState(HERO_SIZE_HEIGHT_HIT_BOX)
   const [HERO_SIZE, setHERO_SIZE] = useState(HERO_SIZE_HEIGHT_IMG)
@@ -65,13 +65,13 @@ export const GravityContextProvider: FunctionComponent<IProps> = ({children}) =>
         gravity_on.current = false
       }
       if (gravity_on.current || !inPlatform.current) {
-        intervalGravity.current = setInterval(() => {
-          setPOSITION_Y(POSITION_Y - JUMP_VELOCITY);
-        }, 20)
-        return () => {
-          clearInterval(intervalGravity.current)
-        }
-      } 
+      intervalGravity.current = setInterval(() => {
+        setPOSITION_Y(POSITION_Y - JUMP_VELOCITY);
+      }, 20)
+      return () => {
+        clearInterval(intervalGravity.current)
+      }
+    } 
   }, [POSITION_Y])
 
   // RESET THE GAME

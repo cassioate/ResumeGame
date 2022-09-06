@@ -54,7 +54,7 @@ export const Arrows = () => {
   /* MOVE RIGHT OR LEFT */
 
   /* JUMPING */
-  // Start the JUMP
+  // Start the jump
   useEffect(() => {
     if (velocity_y.current === 0){
       if (isArrowSpacePress || isArrowUpPress){
@@ -76,24 +76,6 @@ export const Arrows = () => {
     }
   }, [POSITION_Y])
   /* JUMPING */
-
-  useEffect(() => {
-    if (POSITION_X <= GAME_BOX_RANGE_INITIAL){
-      setPOSITION_X(1)
-    } else if (POSITION_X >= GAME_BOX_RANGE_FINAL){
-      setPOSITION_X(GAME_BOX_RANGE_FINAL)
-    }
-    if (velocity_y.current === 0){
-      if (isArrowSpacePress || isArrowUpPress){
-        velocity_y.current = MOVE_RIGHT
-        setPOSITION_X(POSITION_X+velocity_x.current)
-      } 
-      if (isArrowLeftPress){
-        velocity_x.current = -MOVE_LEFT
-        setPOSITION_X(POSITION_X-velocity_x.current)
-      }
-    }
-  }, [POSITION_X, isArrowLeftPress, isArrowRightPress, isArrowDownPress])
 
   useEventListener('keydown', ({key}: any) => {
     if (!END_GAME) {
