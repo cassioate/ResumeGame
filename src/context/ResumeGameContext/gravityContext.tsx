@@ -37,7 +37,7 @@ interface IGravityContext {
 export const GravityContext = React.createContext({} as IGravityContext);
 
 export const GravityContextProvider: FunctionComponent<IProps> = ({children}) => {
-  const [POSITION_Y, setPOSITION_Y] = useState(50);
+  const [POSITION_Y, setPOSITION_Y] = useState(START_FLOOR);
   const [POSITION_X, setPOSITION_X] = useState(START_POSITION);
   const [VELOCITY_OF_MOVE_X, setVELOCITY_OF_MOVE_X] = useState(0);
   const [VELOCITY_OF_MOVE_Y, setVELOCITY_OF_MOVE_Y] = useState(2);
@@ -58,7 +58,9 @@ export const GravityContextProvider: FunctionComponent<IProps> = ({children}) =>
 
   // GRAVITY
   useEffect(() => {
-      if (POSITION_Y <= floor.current){
+      if (POSITION_Y >= maxJump.current){
+        gravity_on.current = true
+      } else if (POSITION_Y <= floor.current){
         clearInterval(intervalGravity.current)
         gravity_on.current = false
       }
@@ -74,11 +76,13 @@ export const GravityContextProvider: FunctionComponent<IProps> = ({children}) =>
 
   // RESET THE GAME
   useEffect(() => {
-    setPOSITION_X(START_POSITION)
-    setPOSITION_Y(START_FLOOR)
-    inPlatform.current = false
-    velocity_y.current = 0
-    velocity_x.current = 0
+    if (END_GAME){
+      setPOSITION_X(START_POSITION)
+      setPOSITION_Y(START_FLOOR)
+      inPlatform.current = false
+      velocity_y.current = 0
+      velocity_x.current = 0
+    }
   }, [END_GAME])
 
   return (

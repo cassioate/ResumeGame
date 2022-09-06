@@ -58,14 +58,12 @@ export const Platforms = () => {
         ) {
           tempInPlatform = true
           floor.current = platform.y
-          console.log(platform.y, POSITION_Y)
           if (POSITION_Y <= floor.current) {
             maxJump.current = platform.y + START_MAX_JUMP
           }
       }
     })
 
-    console.log(POSITION_Y, floor.current, maxJump.current)
     // if (!inside) {
     //   if (POSITION_Y === floor.current) {
     //     inPlatform.current = false
@@ -75,8 +73,7 @@ export const Platforms = () => {
     // if (POSITION_Y === floor.current) {
     //   maxJump.current = floor.current + START_MAX_JUMP
     // }
-    // console.log(tempInPlatform)
-    inPlatform.current = tempInPlatform
+    // inPlatform.current = tempInPlatform
   }, [POSITION_X, POSITION_Y])
 
   useEffect(() => {
