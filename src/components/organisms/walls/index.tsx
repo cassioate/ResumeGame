@@ -10,27 +10,45 @@ interface WallI {
 }
 
 export const Walls = () => {
-  const WALL_LEFT: WallI  = {x: -45, y:-80, width: 50, height: 600}
-  const WALL_RIGHT: WallI  = {x: 780, y:-80, width: 50, height: 600}
+  const WALL_LEFT_1: WallI  = {x: -45, y:200, width: 50, height: 300}
+  const WALL_LEFT_2: WallI  = {x: -45, y:-30, width: 50, height: 300}
+  const WALL_RIGHT_1: WallI  = {x: 780, y:-30, width: 50, height: 300}
+  const WALL_RIGHT_2: WallI  = {x: 780, y:200, width: 50, height: 300}
+  // const WALL_RIGHT_3: WallI  = {x: 780, y:0, width: 50, height: 300}
   const WALL_TOP: WallI  = {x: 140, y:300, width: 100, height: 450}
   const WALL_TOP_2: WallI  = {x: 550, y:300, width: 100, height: 450}
 
   return (
     <>
       <Wall
-        bottom={WALL_LEFT.y}
-        left={WALL_LEFT.x}
-        width={WALL_LEFT.width}
-        height={WALL_LEFT.height}
+        bottom={WALL_LEFT_1.y}
+        left={WALL_LEFT_1.x}
+        width={WALL_LEFT_1.width}
+        height={WALL_LEFT_1.height}
         img={'./assets/walls/wall1.png'}
       />
       <Wall
-        bottom={WALL_RIGHT.y}
-        left={WALL_RIGHT.x}
-        width={WALL_RIGHT.width}
-        height={WALL_RIGHT.height}
+        bottom={WALL_LEFT_2.y}
+        left={WALL_LEFT_2.x}
+        width={WALL_LEFT_2.width}
+        height={WALL_LEFT_2.height}
         img={'./assets/walls/wall1.png'}
       />
+      <Wall
+        bottom={WALL_RIGHT_1.y}
+        left={WALL_RIGHT_1.x}
+        width={WALL_RIGHT_1.width}
+        height={WALL_RIGHT_1.height}
+        img={'./assets/walls/wall1.png'}
+      />
+      <Wall
+        bottom={WALL_RIGHT_2.y}
+        left={WALL_RIGHT_2.x}
+        width={WALL_RIGHT_2.width}
+        height={WALL_RIGHT_2.height}
+        img={'./assets/walls/wall1.png'}
+      />
+
       <Wall
         rotate={90}
         bottom={WALL_TOP.y}

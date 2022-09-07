@@ -22,7 +22,6 @@ export const HitBoxStyled = styled.div.attrs<PropsHitBox>((props) => ({
 }))<PropsHitBox>`
   /* border-bottom-left-radius: 50px; */
   position: absolute;
-  border-style: solid;
   display: flex;
   justify-content: center;
   align-content: center;

@@ -17,20 +17,21 @@ export const Platforms = () => {
   const { POSITION_Y, POSITION_X, inPlatform, floor, maxJump, gravity_on} = useContext(GravityContext)
   const { setEND_GAME } = useContext(GameContext)
 
-  const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:30, width: 150, height: 30}
-  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:260, width: 250, height: 250}
-  const THIRD_PLATFORM_Y_X: PlatformI  = {x: 200, y:30, width: 350, height: 30}
+  const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:30, width: 150, height: 45}
+  const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:260, width: 250, height: 300}
+  const THIRD_PLATFORM_Y_X: PlatformI  = {x: 200, y:30, width: 300, height: 45}
   
-  const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 700, y:300, width: 100, height: 300}
-  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 550, y:30, width: 350, height: 30}
+  const FOURTH_PLATFORM_Y_X: PlatformI  = {x: 720, y:420, width: 100, height: 70}
+  const FIFTH_PLATFORM_Y_X: PlatformI  = {x: 500, y:30, width: 350, height: 45}
 
-  const SUPPORT_PLATFORM_1: PlatformI  = {x: 250, y:90, width: 30, height: 25}
-  const SUPPORT_PLATFORM_2: PlatformI  = {x: 300, y:100, width: 30, height: 25}
-  const SUPPORT_PLATFORM_3: PlatformI  = {x: 250, y:150, width: 30, height: 25}
-  const SUPPORT_PLATFORM_4: PlatformI  = {x: 300, y:200, width: 30, height: 25}
-  const SUPPORT_PLATFORM_5: PlatformI  = {x: 350, y:400, width: 30, height: 25}
-  const SUPPORT_PLATFORM_6: PlatformI  = {x: 350, y:400, width: 30, height: 25}
-  const SUPPORT_PLATFORM_7: PlatformI  = {x: 350, y:400, width: 30, height: 25}
+  const SUPPORT_PLATFORM_1: PlatformI  = {x: 250, y:70, width: 35, height: 35}
+  const SUPPORT_PLATFORM_2: PlatformI  = {x: 300, y:100, width: 35, height: 35}
+  const SUPPORT_PLATFORM_3: PlatformI  = {x: 250, y:140, width: 35, height: 35}
+  const SUPPORT_PLATFORM_4: PlatformI  = {x: 300, y:180, width: 35, height: 35}
+  const SUPPORT_PLATFORM_5: PlatformI  = {x: 250, y:220, width: 35, height: 35}
+  const SUPPORT_PLATFORM_6: PlatformI  = {x: 500, y:300, width: 35, height: 35}
+  const SUPPORT_PLATFORM_7: PlatformI  = {x: 580, y:340, width: 35, height: 35}
+  const SUPPORT_PLATFORM_8: PlatformI  = {x: 650, y:380, width: 35, height: 35}
   
   const platforms: PlatformI[] = [
     FIRST_PLATFORM_X_Y,
@@ -44,7 +45,8 @@ export const Platforms = () => {
     SUPPORT_PLATFORM_4,
     SUPPORT_PLATFORM_5,
     SUPPORT_PLATFORM_6,
-    SUPPORT_PLATFORM_7
+    SUPPORT_PLATFORM_7,
+    SUPPORT_PLATFORM_8
   ]
   
   const tempInPlatform: PlatformI[] = []
@@ -54,6 +56,8 @@ export const Platforms = () => {
         (POSITION_X + HERO_SIZE_WIDTH_HIT_BOX >= platform.x && 
           POSITION_X <= platform.x + platform.width &&
           POSITION_Y >= platform.y && POSITION_Y <= platform.y + START_MAX_JUMP) 
+          // Regra que define que a posição do herói deve ser proxima da plataforma 
+          // ou então ele não contabiliza essa plataforma para utilizar a regra de trocar o chão e o salto
           && platform.y >= POSITION_Y - 5 && platform.y <= POSITION_Y + 5
         ) {
           tempInPlatform.push(platform)
@@ -100,7 +104,7 @@ export const Platforms = () => {
         img={'./assets/platforms/platform2.png'}
       />
       <Platform
-        zIndex={2}
+        zIndex={3}
         bottom={THIRD_PLATFORM_Y_X.y}
         left={THIRD_PLATFORM_Y_X.x}
         width={THIRD_PLATFORM_Y_X.width}
@@ -108,17 +112,8 @@ export const Platforms = () => {
         img={'./assets/platforms/platform3.png'}
       />
 
-
       <Platform
-        zIndex={2}
-        bottom={FOURTH_PLATFORM_Y_X.y}
-        left={FOURTH_PLATFORM_Y_X.x}
-        width={FOURTH_PLATFORM_Y_X.width}
-        height={FOURTH_PLATFORM_Y_X.height}
-        img={'./assets/platforms/platform4.png'}
-      />
-      <Platform
-        zIndex={2}
+        zIndex={3}
         bottom={FIFTH_PLATFORM_Y_X.y}
         left={FIFTH_PLATFORM_Y_X.x}
         width={FIFTH_PLATFORM_Y_X.width}
@@ -126,7 +121,14 @@ export const Platforms = () => {
         img={'./assets/platforms/platform3.png'}
       /> 
 
-
+      <Platform
+        zIndex={0}
+        bottom={FOURTH_PLATFORM_Y_X.y}
+        left={FOURTH_PLATFORM_Y_X.x}
+        width={FOURTH_PLATFORM_Y_X.width}
+        height={FOURTH_PLATFORM_Y_X.height}
+        img={'./assets/platforms/littlePlatform.png'}
+      />
 
       <Platform
         zIndex={2}
@@ -171,9 +173,9 @@ export const Platforms = () => {
       <Platform
         zIndex={2}
         bottom={SUPPORT_PLATFORM_6.y}
-        left={SUPPORT_PLATFORM_4.x}
-        width={SUPPORT_PLATFORM_4.width}
-        height={SUPPORT_PLATFORM_4.height}
+        left={SUPPORT_PLATFORM_6.x}
+        width={SUPPORT_PLATFORM_6.width}
+        height={SUPPORT_PLATFORM_6.height}
         img={'./assets/platforms/platform5.png'}
       />
       <Platform
@@ -182,6 +184,15 @@ export const Platforms = () => {
         left={SUPPORT_PLATFORM_7.x}
         width={SUPPORT_PLATFORM_7.width}
         height={SUPPORT_PLATFORM_7.height}
+        img={'./assets/platforms/platform5.png'}
+      />
+
+      <Platform
+        zIndex={2}
+        bottom={SUPPORT_PLATFORM_8.y}
+        left={SUPPORT_PLATFORM_8.x}
+        width={SUPPORT_PLATFORM_8.width}
+        height={SUPPORT_PLATFORM_8.height}
         img={'./assets/platforms/platform5.png'}
       />
     </> 

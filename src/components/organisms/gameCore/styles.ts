@@ -11,4 +11,6 @@ export const Container = styled.div`
   justify-content: center;
   background-color: rgba(0,0,0,0.4);
   border-radius: 45px ;
+  align-items: center;
+  justify-content: center;
 `;

@@ -13,8 +13,8 @@ export const Decorations = () => {
   const DECORATION_ONE: DecorationsI  = {x: 50, y:0, width: 50, height: 600}
   const DECORATION_TWO: DecorationsI  = {x: 250, y:0, width: 50, height: 600}
   const DECORATION_THREE: DecorationsI  = {x: 500, y:0, width: 150, height: 600}
-  const DECORATION_FOUR: DecorationsI  = {x: -15, y:30, width: 150, height: 200}
-  const DECORATION_FIVE: DecorationsI  = {x: 250, y:230, width: 150, height: 200}
+  const DECORATION_FOUR: DecorationsI  = {x: 0, y:30, width: 80, height: 80}
+  const DECORATION_FIVE: DecorationsI  = {x: 250, y:230, width: 150, height: 100}
   // const DECORATION_SIX: DecorationsI  = {x: 400, y:30, width: 150, height: 200}
   const DECORATION_SEVEN: DecorationsI  = {x: 450, y:30, width: 50, height: 100}
 

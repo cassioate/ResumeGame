@@ -24,12 +24,12 @@ export const HeroHitBox = styled.div.attrs<PropsHero>((props) => ({
 }))<PropsHero>`
 
   position: absolute;
-  border-style: solid;
+  /* border-style: solid; */
   display: flex;
   justify-content: center;
   align-content: center;
   justify-items: center;
   align-items: center;
-  z-index: 3;
+  z-index: 5;
 `
 

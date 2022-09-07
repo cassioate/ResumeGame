@@ -10,9 +10,11 @@ import { Container } from './styles';
 import { Walls } from '../walls';
 import { Spikes } from '../spikes';
 import { Decorations } from '../decorations';
+import { GenericTakeObjects } from '../genericTakeObjects';
+import { Congratulations } from '../../molecules/congratulations';
 
 export const Game = () => {
-  const { END_GAME } = useContext(GameContext)
+  const { END_GAME, CONGRATULATIONS } = useContext(GameContext)
 
   useEffect(() => {
   }, [END_GAME])
@@ -27,6 +29,9 @@ export const Game = () => {
         <Spikes/>
         <Decorations/>
         <Walls/>
+        <GenericTakeObjects/>
+        { CONGRATULATIONS ? <Congratulations/> : null }
+        {/* <Congratulations/>  */}
       </GameBox> 
       <Arrows/>
     </Container>
