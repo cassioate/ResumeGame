@@ -31,7 +31,6 @@ export const Game = () => {
         <Walls/>
         <GenericTakeObjects/>
         { CONGRATULATIONS ? <Congratulations/> : null }
-        {/* <Congratulations/>  */}
       </GameBox> 
       <Arrows/>
     </Container>

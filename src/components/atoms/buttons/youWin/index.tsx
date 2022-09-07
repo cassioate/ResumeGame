@@ -8,8 +8,6 @@ export const YouWinButton = () => {
   const clickYes: any = () => {
     setCONGRATULATIONS(false)
     setEND_GAME(true)
-    //Download
-    alert('DOWNLOAD')
   }
 
   const clickNo: any = () => {
@@ -24,16 +22,14 @@ export const YouWinButton = () => {
         You would like to download my resume?
       </MenuTextContainer>
       <ContainerButton>
-        <ButtonYes id='StartGameButton' onClick={() => clickYes()}>
+        <ButtonYes href="./assets/cv/cv.pdf" download id='StartGameButton' onClick={() => clickYes()}>
           <MenuText>
             YES
-            {/* <BsPlay/> */}
           </MenuText>
         </ButtonYes>
         <ButtonNo id='StartGameButton' onClick={() => clickNo()}>
           <MenuText>
             NO
-            {/* <BsPlay/> */}
           </MenuText>
         </ButtonNo>
       </ContainerButton>

@@ -34,7 +34,8 @@ export const ButtonNo = styled.button`
   }
 `;
 
-export const ButtonYes = styled.button`
+export const ButtonYes = styled.a`
+  text-decoration: none;
   font-size: 25px;
   border-radius: 55px;
   border-color: yellow;
