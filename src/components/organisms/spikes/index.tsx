@@ -16,14 +16,14 @@ export const Spikes = () => {
   const { POSITION_Y, POSITION_X} = useContext(GravityContext)
   const { setEND_GAME } = useContext(GameContext)
 
-  const SPIKE_ONE: SpikesI  = {x: 500, y:10, width: 100, height: 40}
-  const SPIKE_TWO: SpikesI  = {x: 600, y:20, width: 75, height: 30}
-  const SPIKE_THREE: SpikesI  = {x: 650, y:20, width: 45, height: 50}
+  const SPIKE_ONE: SpikesI  = {x: 500, y:10, width: 100, height: 50}
+  const SPIKE_TWO: SpikesI  = {x: 600, y:20, width: 75, height: 40}
+  const SPIKE_THREE: SpikesI  = {x: 650, y:20, width: 45, height: 40}
 
-  const SPIKE_FOUR: SpikesI  = {x: 700, y:10, width: 100, height: 40}
-  const SPIKE_FIVE: SpikesI  = {x: 680, y:20, width: 75, height: 30}
-  const SPIKE_SIX: SpikesI  = {x: 500, y:10, width: 45, height: 50}
-  const SPIKE_SEVEN: SpikesI  = {x: 580, y:20, width: 45, height: 50}
+  const SPIKE_FOUR: SpikesI  = {x: 700, y:10, width: 100, height: 50}
+  const SPIKE_FIVE: SpikesI  = {x: 680, y:20, width: 75, height: 40}
+  const SPIKE_SIX: SpikesI  = {x: 500, y:10, width: 45, height: 40}
+  const SPIKE_SEVEN: SpikesI  = {x: 580, y:20, width: 45, height: 40}
 
   const platforms: SpikesI[] = [
     SPIKE_ONE,

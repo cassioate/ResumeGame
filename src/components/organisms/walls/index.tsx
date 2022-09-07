@@ -12,9 +12,10 @@ interface WallI {
 export const Walls = () => {
   const WALL_LEFT_1: WallI  = {x: -45, y:200, width: 50, height: 300}
   const WALL_LEFT_2: WallI  = {x: -45, y:-30, width: 50, height: 300}
+  
   const WALL_RIGHT_1: WallI  = {x: 780, y:-30, width: 50, height: 300}
   const WALL_RIGHT_2: WallI  = {x: 780, y:200, width: 50, height: 300}
-  // const WALL_RIGHT_3: WallI  = {x: 780, y:0, width: 50, height: 300}
+
   const WALL_TOP: WallI  = {x: 70, y:390, width: 50, height: 250}
   const WALL_TOP_2: WallI  = {x: 280, y:390, width: 50, height: 250}
   const WALL_TOP_3: WallI  = {x: 500, y:390, width: 50, height: 250}
