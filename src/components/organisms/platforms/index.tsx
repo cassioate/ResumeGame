@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { GameContext } from "../../../context/ResumeGameContext/gameContext";
 import { GravityContext } from "../../../context/ResumeGameContext/gravityContext";
 import { HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
@@ -14,8 +14,9 @@ interface PlatformI {
 
 export const Platforms = () => {
 
-  const { POSITION_Y, POSITION_X, inPlatform, floor, maxJump, gravity_on} = useContext(GravityContext)
+  const { POSITION_Y, POSITION_X, inPlatform, floor, gravity_on} = useContext(GravityContext)
   const { setEND_GAME } = useContext(GameContext)
+  const maxJump = useRef(START_MAX_JUMP)
 
   const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:30, width: 150, height: 45}
   const SECOND_PLATFORM_X_Y: PlatformI  = {x: 200, y:260, width: 250, height: 300}

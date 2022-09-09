@@ -9,11 +9,15 @@ import { GravityContext } from '../../../../context/ResumeGameContext/gravityCon
 import { KeyboardContext } from '../../../../context/ResumeGameContext/keyboardContext';
 
 export const Arrows = () => {
-  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on, intervalJump, velocity_x, velocity_y } = useContext(GravityContext)
   const { END_GAME } = useContext(GameContext)
+  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on} = useContext(GravityContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
+
   const intervalLeft = useRef<any>()
+  const intervalJump = useRef<any>()
+  const velocity_y = useRef(0)
+  const velocity_x = useRef(0)
 
   /* MOVE RIGHT OR LEFT */
   // START the move for the Right or the Left inside the GameBox
@@ -72,7 +76,7 @@ export const Arrows = () => {
     if (!END_GAME) {
       switch (key) {
         case 'ArrowLeft':
-          if (!isArrowRightPress){
+          if (!isArrowLeftPress){
             setIsArrowLeftPress(true)
           }
           break
