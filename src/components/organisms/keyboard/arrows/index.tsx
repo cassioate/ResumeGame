@@ -1,21 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef } from 'react';
-import { SpaceKeyboard } from '../../../atoms/buttons/arrowButtons/aKeyboardSpace';
-import { ArrowDown } from '../../../atoms/buttons/arrowButtons/arrowDown';
-import { ArrowLeft } from '../../../atoms/buttons/arrowButtons/arrowLeft';
-import { ArrowRight } from '../../../atoms/buttons/arrowButtons/arrowRight';
-import { ArrowUp } from '../../../atoms/buttons/arrowButtons/arrowUp';
 import useEventListener from '@use-it/event-listener';
 
-import { Container, ContainerArrow } from './styles';
-import { MOVE_RIGHT, MOVE_LEFT, HERO_SIZE_HEIGHT_IMG, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL, JUMP_VELOCITY } from '../../../../settings/constants';
+import { Container } from './styles';
+import { MOVE_RIGHT, MOVE_LEFT, GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL, JUMP_VELOCITY } from '../../../../settings/constants';
 import { GameContext } from '../../../../context/ResumeGameContext/gameContext';
 import { GravityContext } from '../../../../context/ResumeGameContext/gravityContext';
 import { KeyboardContext } from '../../../../context/ResumeGameContext/keyboardContext';
 
 export const Arrows = () => {
-  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on, intervalJump,
-    velocity_x, velocity_y, setHERO_SIZE } = useContext(GravityContext)
+  const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on, intervalJump, velocity_x, velocity_y } = useContext(GravityContext)
   const { END_GAME } = useContext(GameContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
@@ -88,7 +82,6 @@ export const Arrows = () => {
           }
           break
         case 'ArrowDown':
-          setHERO_SIZE(HERO_SIZE_HEIGHT_IMG*0.75)
           setIsArrowDownPress(true)
           break
         case 'ArrowUp':
@@ -121,7 +114,6 @@ export const Arrows = () => {
           setIsArrowRightPress(false)
           break
         case 'ArrowDown':
-          setHERO_SIZE(HERO_SIZE_HEIGHT_IMG)
           setIsArrowDownPress(false)
           break
         case 'ArrowUp':
