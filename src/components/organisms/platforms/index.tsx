@@ -16,6 +16,7 @@ export const Platforms = () => {
 
   const { POSITION_Y, POSITION_X, inPlatform, floor, gravity_on} = useContext(GravityContext)
   const { setEND_GAME } = useContext(GameContext)
+  
   const maxJump = useRef(START_MAX_JUMP)
 
   const FIRST_PLATFORM_X_Y: PlatformI = {x: 0, y:30, width: 150, height: 45}

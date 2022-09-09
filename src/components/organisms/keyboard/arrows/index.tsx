@@ -19,6 +19,12 @@ export const Arrows = () => {
   const velocity_y = useRef(0)
   const velocity_x = useRef(0)
 
+  // Reset the game
+  useEffect(() => {
+    velocity_y.current = 0
+    velocity_x.current = 0
+  }, [END_GAME])
+
   /* MOVE RIGHT OR LEFT */
   // START the move for the Right or the Left inside the GameBox
   useEffect(() => {

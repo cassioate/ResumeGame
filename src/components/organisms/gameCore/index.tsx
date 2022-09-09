@@ -16,9 +16,6 @@ import { Congratulations } from '../../molecules/congratulations';
 export const Game = () => {
   const { END_GAME, CONGRATULATIONS } = useContext(GameContext)
 
-  useEffect(() => {
-  }, [END_GAME])
-
   return (
     <Container id="ContainerResumeGame">
       <GameBox>

@@ -9,13 +9,7 @@ interface IProps {
 }
 
 interface IGravityContext {
-  setPOSITION_Y: (position: number) => void;
-  setPOSITION_X: (position: number) => void;
-  POSITION_Y: number;
-  POSITION_X: number;
-  inPlatform: any;
-  gravity_on: any;
-  floor: any;
+
 }
 
 export const GravityContext = React.createContext({} as IGravityContext);
