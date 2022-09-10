@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import React from 'react';
 import {HeroStyled, HeroHitBox} from './styles';
-import { HERO_IMG_JUMP, HERO_IMG_STOPPED, HERO_IMG_WALK, HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_HIT_BOX, HERO_SIZE_WIDTH_IMG } from '../../../settings/constants';
-import { GravityContext } from '../../../context/ResumeGameContext/gravityContext';
-import { KeyboardContext } from '../../../context/ResumeGameContext/keyboardContext';
+import { HERO_IMG_JUMP, HERO_IMG_STOPPED, HERO_IMG_WALK, HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_HEIGHT_IMG, HERO_SIZE_WIDTH_HIT_BOX, HERO_SIZE_WIDTH_IMG } from '../../../../settings/constants';
+import { GravityContext } from '../../../../context/ResumeGameContext/gravityContext';
+import { KeyboardContext } from '../../../../context/ResumeGameContext/keyboardContext';
 
 export const Hero = () => {
   const {isArrowRightPress, isArrowLeftPress, isArrowSpacePress, isArrowUpPress, isArrowDownPress} = useContext(KeyboardContext)

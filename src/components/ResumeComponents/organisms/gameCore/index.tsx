@@ -10,8 +10,8 @@ import { Spikes } from '../spikes';
 import { Decorations } from '../decorations';
 import { GenericTakeObjects } from '../genericTakeObjects';
 import { Congratulations } from '../../molecules/congratulations';
-import { GameStats } from '../../../context/ResumeGameContext/gameStatsContext';
-import { GameMoveProvider } from '../../../context/ResumeGameContext/gameMoveContext';
+import { GameStats } from '../../../../context/ResumeGameContext/gameStatsContext';
+import { GameMoveProvider } from '../../../../context/ResumeGameContext/gameMoveContext';
 
 export const Game = () => {
   const { END_GAME, CONGRATULATIONS } = useContext(GameStats)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavList } from '../../atoms/buttons/navList'
+import { NavList } from '../../atoms/navList'
 
 import { HeaderStyled } from './styles'
 

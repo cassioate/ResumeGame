@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
-import { GameStats } from "../../../context/ResumeGameContext/gameStatsContext";
-import { GravityContext } from "../../../context/ResumeGameContext/gravityContext";
-import { HERO_SIZE_WIDTH_HIT_BOX } from "../../../settings/constants";
+import { GameStats } from "../../../../context/ResumeGameContext/gameStatsContext";
+import { GravityContext } from "../../../../context/ResumeGameContext/gravityContext";
+import { HERO_SIZE_WIDTH_HIT_BOX } from "../../../../settings/constants";
 import { Spike } from "../../atoms/spike";
 
 interface ObjectI {
