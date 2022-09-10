@@ -1,101 +1,63 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FunctionComponent, ReactElement, useEffect, useRef, useState } from "react";
+import React, { FunctionComponent, MutableRefObject, ReactElement, useEffect, useRef, useState } from "react";
 import { useContext } from "react";
-import { START_MAX_JUMP, START_POSITION, HERO_SIZE_WIDTH_HIT_BOX,
-  HERO_SIZE_HEIGHT_HIT_BOX, HERO_SIZE_HEIGHT_IMG, START_FLOOR, JUMP_VELOCITY } from "../../settings/constants";
-import { GameContext } from "./gameContext";
+import { START_POSITION, START_FLOOR, JUMP_VELOCITY } from "../../settings/constants";
+import { GameStats } from "./gameStatsContext";
 
 interface IProps {
   children: ReactElement;
 }
 
 interface IGravityContext {
-  POSITION_Y: number;
-  POSITION_X: number;
-  VELOCITY_OF_MOVE_X: number;
-  VELOCITY_OF_MOVE_Y: number;
-  HIT_BOX_HERO_WIDTH: number;
-  HIT_BOX_HERO_HEIGHT: number;
-  HERO_SIZE: number;
-  inPlatform: any;
-  floor: any;
-  maxJump: any;
-  velocity_x: any;
-  velocity_y: any;
-  position_x: any;
-  position_y: any;
-  gravity_on: any;
-  intervalJump: any;
-  validJump: any;
-  setPOSITION_Y: (position: number) => void;
-  setPOSITION_X: (position: number) => void;
-  setVELOCITY_OF_MOVE_X: (velocity: number) => void;
-  setVELOCITY_OF_MOVE_Y: (velocity: number) => void;
-  setHIT_BOX_HERO_WIDTH: (width: number) => void;
-  setHIT_BOX_HERO_HEIGHT: (height: number) => void;
-  setHERO_SIZE: (size: number) => void;
+  floor: MutableRefObject<number>
+  inPlatform: MutableRefObject<boolean>
+  gravity_on: MutableRefObject<boolean>
+  POSITION_X: number
+  POSITION_Y: number
+  setPOSITION_X: (value: number) => void
+  setPOSITION_Y: (value: number) => void
 }
 
 export const GravityContext = React.createContext({} as IGravityContext);
 
 export const GravityContextProvider: FunctionComponent<IProps> = ({children}) => {
-  const [POSITION_Y, setPOSITION_Y] = useState(START_FLOOR);
+  const { END_GAME } = useContext(GameStats)
+  
   const [POSITION_X, setPOSITION_X] = useState(START_POSITION);
-  const [VELOCITY_OF_MOVE_X, setVELOCITY_OF_MOVE_X] = useState(0);
-  const [VELOCITY_OF_MOVE_Y, setVELOCITY_OF_MOVE_Y] = useState(0);
-  const [HIT_BOX_HERO_WIDTH, setHIT_BOX_HERO_WIDTH] = useState(HERO_SIZE_WIDTH_HIT_BOX)
-  const [HIT_BOX_HERO_HEIGHT, setHIT_BOX_HERO_HEIGHT] = useState(HERO_SIZE_HEIGHT_HIT_BOX)
-  const [HERO_SIZE, setHERO_SIZE] = useState(HERO_SIZE_HEIGHT_IMG)
-  const { END_GAME } = useContext(GameContext)
+  const [POSITION_Y, setPOSITION_Y] = useState(START_FLOOR);
 
-  const position_x = useRef(START_POSITION)
-  const position_y = useRef(START_FLOOR)
-  const maxJump = useRef(START_MAX_JUMP)
+  const intervalGravity = useRef<NodeJS.Timer>()
   const floor = useRef(START_FLOOR)
   const inPlatform = useRef(true)
-  const velocity_y = useRef(0)
-  const velocity_x = useRef(0)
   const gravity_on = useRef(true)
-  const intervalJump = useRef<any>()
-  const intervalGravity = useRef<NodeJS.Timer>()
-  const validJump = useRef<any>()
 
   // GRAVITY
   useEffect(() => {
-      if (POSITION_Y >= maxJump.current){
-        gravity_on.current = true
-      } else if (POSITION_Y <= floor.current){
-        clearInterval(intervalJump.current)
-        clearInterval(intervalGravity.current)
-        gravity_on.current = false
-      }
-      if (gravity_on.current || !inPlatform.current) {
+    // power off the gravity if is in the ground or below
+    if (POSITION_Y <= floor.current){
+      gravity_on.current = false
+    }
+    // This worked like recursive, if not in platform then put the gravity in state of true and call this every time
+    if (gravity_on.current || !inPlatform.current) {
       gravity_on.current = true
       intervalGravity.current = setInterval(() => {
-        setPOSITION_Y(POSITION_Y - JUMP_VELOCITY);
-      }, 20)
-      return () => {
-        clearInterval(intervalGravity.current)
-      }
-    } 
+      setPOSITION_Y(POSITION_Y - JUMP_VELOCITY);
+    }, 20)
+    return () => {
+      clearInterval(intervalGravity.current)
+    }
+  } 
   }, [POSITION_Y, POSITION_X])
 
   // RESET THE GAME
   useEffect(() => {
-    if (END_GAME){
-      setPOSITION_X(START_POSITION)
-      setPOSITION_Y(START_FLOOR)
-      velocity_x.current = 0
-    }
+    setPOSITION_X(START_POSITION)
+    setPOSITION_Y(START_FLOOR)
   }, [END_GAME])
 
   return (
-    <GravityContext.Provider value={{ position_x, position_y, gravity_on, intervalJump, validJump,
-      POSITION_Y, POSITION_X, VELOCITY_OF_MOVE_X, VELOCITY_OF_MOVE_Y, HIT_BOX_HERO_WIDTH, maxJump, velocity_x, velocity_y,
-      HIT_BOX_HERO_HEIGHT, HERO_SIZE, floor, inPlatform,
-      setPOSITION_Y, setPOSITION_X, setVELOCITY_OF_MOVE_X, setVELOCITY_OF_MOVE_Y,
-      setHIT_BOX_HERO_WIDTH, setHIT_BOX_HERO_HEIGHT, setHERO_SIZE
-    }}>
+    <GravityContext.Provider value={{ 
+      gravity_on, POSITION_Y, POSITION_X, floor, inPlatform, setPOSITION_Y, setPOSITION_X }}>
       {children}
     </GravityContext.Provider>
   );
