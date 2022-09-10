@@ -1,25 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FunctionComponent, ReactElement, useRef, useContext, useEffect } from "react";
+import React, { FunctionComponent, ReactElement, useRef, useContext, useEffect, MutableRefObject } from "react";
 import { GAME_BOX_RANGE_FINAL, GAME_BOX_RANGE_INITIAL, JUMP_VELOCITY, MOVE_LEFT, MOVE_RIGHT } from "../../settings/constants";
 import { GravityContext } from "./gravityContext";
 import { KeyboardContext } from "./keyboardContext";
 import useEventListener from '@use-it/event-listener';
+import { GameStats } from "./gameStatsContext";
 
 interface IProps {
   children: ReactElement;
 }
 
-interface IGravityContext {
-  END_GAME: boolean;
-  CONGRATULATIONS: boolean;
-  setEND_GAME: (value: boolean) => void;
-  setCONGRATULATIONS: (value: boolean) => void;
-}
+export const GameMove = React.createContext({});
 
-export const GameContext = React.createContext({} as IGravityContext);
-
-export const GameContextProvider: FunctionComponent<IProps> = ({children}) => {
-  const { END_GAME } = useContext(GameContext)
+export const GameMoveProvider: FunctionComponent<IProps> = ({children}) => {
+  const { END_GAME } = useContext(GameStats)
   const { POSITION_Y, setPOSITION_Y, POSITION_X, setPOSITION_X, gravity_on} = useContext(GravityContext)
   const { isArrowDownPress, isArrowLeftPress, isArrowRightPress, isArrowSpacePress, isArrowUpPress,
   setIsArrowDownPress, setIsArrowLeftPress, setIsArrowRightPress, setIsArrowSpacePress, setIsArrowUpPress } = useContext(KeyboardContext)
@@ -147,10 +141,8 @@ export const GameContextProvider: FunctionComponent<IProps> = ({children}) => {
   })
 
   return (
-    <GameContext.Provider value={{
-      END_GAME, CONGRATULATIONS, setEND_GAME, setCONGRATULATIONS
-    }}>
+    <GameMove.Provider value={{}}>
       {children}
-    </GameContext.Provider>
+    </GameMove.Provider>
   );
 }

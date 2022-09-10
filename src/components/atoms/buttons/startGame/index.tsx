@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import{MenuText, StartButton} from './styles';
 import { BsPlay } from "react-icons/bs"
-import { GameContext } from '../../../../context/ResumeGameContext/gameContext';
+import { GameStats } from '../../../../context/ResumeGameContext/gameStatsContext';
 
 export const StartGameButton = () => {
-  const { setEND_GAME } = useContext(GameContext)
+  const { setEND_GAME } = useContext(GameStats)
   return (
     <StartButton id='StartGameButton' onClick={() => setEND_GAME(false)}>
       <MenuText>

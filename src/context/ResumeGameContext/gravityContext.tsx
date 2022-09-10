@@ -1,23 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FunctionComponent, ReactElement, useEffect, useRef, useState } from "react";
+import React, { FunctionComponent, MutableRefObject, ReactElement, useEffect, useRef, useState } from "react";
 import { useContext } from "react";
 import { START_POSITION, START_FLOOR, JUMP_VELOCITY } from "../../settings/constants";
-import { GameContext } from "./gameContext";
+import { GameStats } from "./gameStatsContext";
 
 interface IProps {
   children: ReactElement;
 }
 
 interface IGravityContext {
-
+  floor: MutableRefObject<number>
+  inPlatform: MutableRefObject<boolean>
+  gravity_on: MutableRefObject<boolean>
+  POSITION_X: number
+  POSITION_Y: number
+  setPOSITION_X: (value: number) => void
+  setPOSITION_Y: (value: number) => void
 }
 
 export const GravityContext = React.createContext({} as IGravityContext);
 
 export const GravityContextProvider: FunctionComponent<IProps> = ({children}) => {
+  const { END_GAME } = useContext(GameStats)
+  
   const [POSITION_X, setPOSITION_X] = useState(START_POSITION);
   const [POSITION_Y, setPOSITION_Y] = useState(START_FLOOR);
-  const { END_GAME } = useContext(GameContext)
 
   const intervalGravity = useRef<NodeJS.Timer>()
   const floor = useRef(START_FLOOR)

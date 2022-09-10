@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import{MenuText, ButtonNo, ButtonYes, ContainerButton, Container, MenuTextContainer} from './styles';
-import { GameContext } from '../../../../context/ResumeGameContext/gameContext';
+import { GameStats } from '../../../../context/ResumeGameContext/gameStatsContext';
 
 export const YouWinButton = () => {
-  const { setEND_GAME, setCONGRATULATIONS } = useContext(GameContext)
+  const { setEND_GAME, setCONGRATULATIONS } = useContext(GameStats)
 
   const clickYes: any = () => {
     setCONGRATULATIONS(false)

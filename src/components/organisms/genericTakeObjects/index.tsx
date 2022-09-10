@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
-import { GameContext } from "../../../context/ResumeGameContext/gameContext";
+import { GameStats } from "../../../context/ResumeGameContext/gameStatsContext";
 import { GravityContext } from "../../../context/ResumeGameContext/gravityContext";
 import { HERO_SIZE_WIDTH_HIT_BOX } from "../../../settings/constants";
 import { Spike } from "../../atoms/spike";
@@ -14,7 +14,7 @@ interface ObjectI {
 
 export const GenericTakeObjects = () => {
   const { POSITION_Y, POSITION_X} = useContext(GravityContext)
-  const { setEND_GAME, setCONGRATULATIONS } = useContext(GameContext)
+  const { setEND_GAME, setCONGRATULATIONS } = useContext(GameStats)
 
   const RESUME_OBJECT: ObjectI  = {x: 750, y:430, width: 20, height: 30}
 

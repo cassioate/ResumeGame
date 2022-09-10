@@ -1,20 +1,20 @@
 import React from 'react';
 import { AppStyled } from '../App-styled';
 import { Game } from '../../components/organisms/gameCore';
-import { GameContextProvider } from '../../context/ResumeGameContext/gameContext';
 import { GravityContextProvider } from '../../context/ResumeGameContext/gravityContext';
 import { KeyboardContextProvider } from '../../context/ResumeGameContext/keyboardContext';
+import { GameStatsProvider } from '../../context/ResumeGameContext/gameStatsContext';
 
 export const ResumeGame = () => {
   return (
       <AppStyled>
-        <GameContextProvider>
+        <GameStatsProvider>
           <GravityContextProvider>
             <KeyboardContextProvider>
               <Game/> 
             </KeyboardContextProvider>        
           </GravityContextProvider>
-        </GameContextProvider>
+        </GameStatsProvider>
       </AppStyled>
   );
 }

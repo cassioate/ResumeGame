@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef } from "react";
-import { GameContext } from "../../../context/ResumeGameContext/gameContext";
+import { GameStats } from "../../../context/ResumeGameContext/gameStatsContext";
 import { GravityContext } from "../../../context/ResumeGameContext/gravityContext";
 import { HERO_SIZE_WIDTH_HIT_BOX, POSITION_Y_TO_DIE, START_FLOOR, START_MAX_JUMP } from "../../../settings/constants";
 import { Platform } from "../../atoms/platform";
@@ -15,7 +15,7 @@ interface PlatformI {
 export const Platforms = () => {
 
   const { POSITION_Y, POSITION_X, inPlatform, floor, gravity_on} = useContext(GravityContext)
-  const { setEND_GAME } = useContext(GameContext)
+  const { setEND_GAME } = useContext(GameStats)
   
   const maxJump = useRef(START_MAX_JUMP)
 

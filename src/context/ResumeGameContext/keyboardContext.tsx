@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useEffect, useState } from "react";
 import { useContext } from "react";
-import { GameContext } from "./gameContext";
+import { GameStats } from "./gameStatsContext";
 
 interface IProps {
   children: ReactElement;
@@ -22,12 +22,13 @@ interface IGravityContext {
 export const KeyboardContext = React.createContext({} as IGravityContext);
 
 export const KeyboardContextProvider: FunctionComponent<IProps> = ({children}) => {
+  const { END_GAME } = useContext(GameStats)
+  
   const [isArrowRightPress, setIsArrowRightPress] = useState(false)
   const [isArrowLeftPress, setIsArrowLeftPress] = useState(false)
   const [isArrowUpPress, setIsArrowUpPress] = useState(false)
   const [isArrowDownPress, setIsArrowDownPress] = useState(false)
   const [isArrowSpacePress, setIsArrowSpacePress] = useState(false)
-  const { END_GAME } = useContext(GameContext)
 
   useEffect(() => {
     setIsArrowRightPress(false)
